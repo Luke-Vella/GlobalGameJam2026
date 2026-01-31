@@ -7,7 +7,6 @@ public class EnemyTypeOneManager : MonoBehaviour
     private bool isHovering = true;
     private bool isWindingUp = false;
     private bool isCollided = false;
-    private bool isOnCooldown = false;
     private float windUpTimer = 0f;
     private float coolDownTimer = 0f;
     private Vector2 engageDirection = new Vector2();
@@ -50,7 +49,7 @@ public class EnemyTypeOneManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (isHovering && !isOnCooldown)
+        if (isHovering)
         {
             Debug.Log("Entered hover stage");
             HoverBehaviour();
@@ -178,7 +177,6 @@ public class EnemyTypeOneManager : MonoBehaviour
         if (rb.velocity.magnitude < 0.2f)
         {
             Debug.Log("Entering Cooldown");
-            isOnCooldown = true;
             coolDownTimer += Time.fixedDeltaTime;
 
             if (coolDownTimer >= coolDown)
@@ -190,7 +188,6 @@ public class EnemyTypeOneManager : MonoBehaviour
                 }
                 Debug.Log($"Resetting cooldown: timer: {coolDownTimer}");
                 coolDownTimer = 0; // reset cooldown
-                isOnCooldown = false;
             }
         }
         isCollided = false;
