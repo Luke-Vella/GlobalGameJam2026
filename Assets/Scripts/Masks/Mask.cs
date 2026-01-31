@@ -1,18 +1,44 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Mask : MonoBehaviour
+public abstract class Mask : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("Mask Properties")]
+    public string maskName;
+    public Sprite maskIcon;
+
+    [Header("Movement Modifiers")]
+    public float speedMultiplier = 1f;
+    public float oxygenConsumptionRate = 1f;
+
+    protected PlayerController player;
+
+    public virtual void Initialize(PlayerController playerController)
     {
-        
+        player = playerController;
     }
 
-    // Update is called once per frame
-    void Update()
+    public virtual void OnEquip()
     {
-        
+        Debug.Log($"Equipped {maskName}");
+    }
+
+    public virtual void OnUnequip()
+    {
+        Debug.Log($"Unequipped {maskName}");
+    }
+
+    public virtual void UpdateMask()
+    {
+        // Called every frame while mask is equipped
+    }
+
+    public virtual void UsePrimaryAbility()
+    {
+        // Override in derived classes for specific abilities
+    }
+
+    public virtual void UseSecondaryAbility()
+    {
+        // Override in derived classes for specific abilities
     }
 }
