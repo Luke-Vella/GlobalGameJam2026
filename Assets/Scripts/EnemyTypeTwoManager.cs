@@ -152,7 +152,7 @@ public class EnemyTypeTwoManager : MonoBehaviour
         else
         {
             // projectile spawning
-            Vector3 spawnPosition = transform.position + (Vector3)lookDirection * 0.5f; // Spawn slightly ahead
+            Vector3 spawnPosition = transform.position + (Vector3)lookDirection * 1f; // Spawn slightly ahead
             GameObject projectile = Instantiate(projectileObject, spawnPosition, Quaternion.identity);
 
             // Ensure the projectile has a Rigidbody2D component
