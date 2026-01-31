@@ -7,6 +7,7 @@ public class EnemyTypeOneManager : MonoBehaviour
     private bool isHovering = true;
     private bool isWindingUp = false;
     private bool isCollided = false;
+    private bool isOnCooldown = false;
     private float windUpTimer = 0f;
     private float coolDownTimer = 0f;
     private Vector2 engageDirection = new Vector2();
@@ -49,8 +50,9 @@ public class EnemyTypeOneManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (isHovering)
+        if (isHovering && !isOnCooldown)
         {
+            Debug.Log("Entered hover stage");
             HoverBehaviour();
             CheckForPlayer();
         }
@@ -141,7 +143,7 @@ public class EnemyTypeOneManager : MonoBehaviour
     {
         isHovering = false;
         currentTarget = rb.position; //nullify hover target
-        //set wind up direction
+        //set windUp direction
         engageDirection = (player.position - transform.position).normalized;
         RotateTowards(engageDirection); //currently wind up will start during rotation
         isWindingUp = true;
@@ -176,17 +178,19 @@ public class EnemyTypeOneManager : MonoBehaviour
         if (rb.velocity.magnitude < 0.2f)
         {
             Debug.Log("Entering Cooldown");
+            isOnCooldown = true;
             coolDownTimer += Time.fixedDeltaTime;
 
             if (coolDownTimer >= coolDown)
             {
-                Debug.Log("Cooldown passed");
                 if(!CheckForPlayer()) //if player no longer in range, go back to hovering
                 {
                     isHovering = true;
                     PickNewHoverTarget();
                 }
+                Debug.Log($"Resetting cooldown: timer: {coolDownTimer}");
                 coolDownTimer = 0; // reset cooldown
+                isOnCooldown = false;
             }
         }
         isCollided = false;
@@ -210,17 +214,10 @@ public class EnemyTypeOneManager : MonoBehaviour
         rb.velocity = Vector2.zero;
         rb.angularVelocity = 0f;
 
-        // Reset states
-        isHovering = true;
-        isWindingUp = false;
-
-        windUpTimer = 0f;
-        coolDownTimer = 0f;
-        shakeTime = 0f;
-
         // Clear targets
         currentTarget = rb.position;
-        engageDirection = Vector2.zero;
+
+        Debug.Log("Resetting Movement after Collision");
     }
 
     void OnCollisionEnter2D(Collision2D collision)
