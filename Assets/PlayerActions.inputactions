@@ -33,6 +33,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "PrimaryAction",
+                    "type": "Button",
+                    "id": "b2630796-3e30-4f0c-b75c-6cf8043366c7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "EquipDefaultMask",
                     "type": "Button",
                     "id": "994f86c6-6e94-4220-800e-3fc732a02ecc",
@@ -219,6 +228,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ActivateSecondaryMaskAbility",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a9d9415b-f506-403c-90fa-1b971f7def6e",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PrimaryAction",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
