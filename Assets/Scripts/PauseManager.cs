@@ -39,6 +39,8 @@ public class PauseManager : MonoBehaviour
 
     void Pause()
     {
+        AudioManager.Instance.PlaySFX(AudioDatabase.Instance.PauseMenuClip);
+
         PauseMenu.SetActive(true);  // shows UI
         Time.timeScale = 0f;          // time is blocked
         isPaused = true;

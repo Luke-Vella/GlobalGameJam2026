@@ -321,7 +321,7 @@ PrefabInstance:
     - target: {fileID: 2771224549731727736, guid: 406d4ced7a8421f4cbd7bcc965414dd0, type: 3}
       propertyPath: speedBurstStopClip
       value: 
-      objectReference: {fileID: 8300000, guid: 794f99b852e7d894588d191577a40492, type: 3}
+      objectReference: {fileID: 8300000, guid: a0f2a1e95e256404ebfc1645256f59d4, type: 3}
     - target: {fileID: 2771224549731727736, guid: 406d4ced7a8421f4cbd7bcc965414dd0, type: 3}
       propertyPath: swordFishChargeClip
       value: 
