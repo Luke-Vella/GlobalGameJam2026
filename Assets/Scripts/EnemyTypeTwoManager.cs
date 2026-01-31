@@ -47,6 +47,7 @@ public class EnemyTypeTwoManager : MonoBehaviour
 
     void FixedUpdate()
     {
+        Debug.Log($"ShooterFish: IsCollided: {isCollided}");
         if (isHovering)
         {
             Debug.Log("Entered hover stage");
@@ -117,7 +118,7 @@ public class EnemyTypeTwoManager : MonoBehaviour
 
             if (!hit)
             {
-                Debug.Log("Raycast not blocked");
+                Debug.Log($"ShooterFish: Raycast not blocked");
                 EngagePlayer();
                 return true;
             }
@@ -128,8 +129,10 @@ public class EnemyTypeTwoManager : MonoBehaviour
     void EngagePlayer()
     {
         isHovering = false;
+        rb.velocity = Vector2.zero;
+        Debug.Log($"ShooterFish: isHovering = {isHovering}");
         currentTarget = rb.position; //nullify hover target
-        lookDirection = (player.position - transform.position.normalized).normalized;
+        lookDirection = (player.position - transform.position).normalized;
         StartCoroutine(RotateTowards(lookDirection));
     }
 
@@ -157,10 +160,8 @@ public class EnemyTypeTwoManager : MonoBehaviour
 
             // Ensure the projectile has a Rigidbody2D component
             Rigidbody2D projectileRb = projectile.GetComponent<Rigidbody2D>();
-            if (projectileRb != null)
-            {
-                projectileRb.velocity = lookDirection * projectileSpeed;
-            }
+           projectileRb.velocity = lookDirection * projectileSpeed;
+
             isOnCooldown = true;
         }
     }
