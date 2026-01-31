@@ -16,13 +16,17 @@ public class PlayerController : MonoBehaviour
     public float boostMultiplier = 4f;
 
     [Header("Lumen Mask Settings")]
-    public Light2D lightSource;
+    public Light2D lightForward;
+    public Light2D lightBackward;
 
     [Header("Rotation")]
     public float rotationSpeed = 5f;
     public float maxRotationSpeed = 180f;
     public float rotationDrag = 3f;
     public float movingRotationMultiplier = 0.3f;
+
+    [Header("Sprite Settings")]
+    public SpriteRenderer spriteRenderer;
 
     [Header("Mask System")]
     public Mask[] availableMasks; // Assign masks in order: [0] = Default, [1] = Lumen, [2] = Sonar
@@ -39,11 +43,18 @@ public class PlayerController : MonoBehaviour
 
     private Camera mainCamera;
     private float currentRotationVelocity = 0f;
+    private bool isFacingLeft = false;
 
     private void Awake()
     {
         Rb = GetComponent<Rigidbody2D>();
         mainCamera = Camera.main;
+
+        // Auto-assign sprite renderer if not set
+        if (spriteRenderer == null)
+        {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+        }
 
         StateMachine = new PlayerStateMachine();
         IdleSwimState = new IdleSwimState(this, StateMachine);
@@ -118,8 +129,45 @@ public class PlayerController : MonoBehaviour
 
         direction.Normalize();
 
-        float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+        // Calculate angle in degrees
+        float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        
+        // Determine if we should flip the sprite based on angle
+        // If angle is between -90 and 90, face right (no flip)
+        // If angle is beyond that, face left (flip)
+        if (spriteRenderer != null)
+        {
+            if (targetAngle > 90f || targetAngle < -90f)
+            {
+                // Facing left - flip sprite
+                spriteRenderer.flipX = true;
+                isFacingLeft = true;
+                // Adjust angle to keep sprite upright
+                targetAngle -= 180f;
+                
+                // Switch to backward light
+                UpdateLightOrientation(true);
+            }
+            else
+            {
+                // Facing right - normal orientation
+                spriteRenderer.flipX = false;
+                isFacingLeft = false;
+                
+                // Switch to forward light
+                UpdateLightOrientation(false);
+            }
+        }
+
+        // Subtract 90 because sprite faces up by default
+        targetAngle -= 90f;
+
         float currentAngle = transform.eulerAngles.z;
+        // Normalize current angle to -180 to 180 range
+        if (currentAngle > 180f)
+        {
+            currentAngle -= 360f;
+        }
 
         float angleDifference = Mathf.DeltaAngle(currentAngle, targetAngle);
 
@@ -137,6 +185,47 @@ public class PlayerController : MonoBehaviour
 
         float newAngle = currentAngle + currentRotationVelocity * Time.deltaTime;
         transform.rotation = Quaternion.Euler(0f, 0f, newAngle);
+    }
+
+    private void UpdateLightOrientation(bool facingLeft)
+    {
+        if (lightForward == null || lightBackward == null) return;
+
+        if (facingLeft)
+        {
+            // Use backward light when facing left
+            if (lightForward.enabled)
+            {
+                bool wasOn = lightForward.enabled;
+                lightForward.enabled = false;
+                lightBackward.enabled = wasOn; // Preserve on/off state
+            }
+        }
+        else
+        {
+            // Use forward light when facing right
+            if (lightBackward.enabled || !lightForward.enabled)
+            {
+                bool wasOn = lightBackward.enabled;
+                lightBackward.enabled = false;
+                lightForward.enabled = wasOn; // Preserve on/off state
+            }
+        }
+    }
+
+    public void SetLightState(bool isOn)
+    {
+        // Public method to turn lights on/off (called by LumenMask)
+        if (isFacingLeft)
+        {
+            if (lightBackward != null)
+                lightBackward.enabled = isOn;
+        }
+        else
+        {
+            if (lightForward != null)
+                lightForward.enabled = isOn;
+        }
     }
 
     private void InitializeMasks()
