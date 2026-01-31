@@ -433,7 +433,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &508404676
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -533,6 +533,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c5129e6f38bb7846a4fb4c0005766cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hoverRadius: 4
+  hoverSpeed: 1.5
+  hoverPointTolerance: 0.2
+  projectileSpeed: 6
+  velocityDamping: 4
+  playerDetectionRange: 5
+  rotationSpeed: 720
+  coolDown: 1
+  projectileObject: {fileID: 0}
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &572131960
 PrefabInstance:
   m_ObjectHideFlags: 0

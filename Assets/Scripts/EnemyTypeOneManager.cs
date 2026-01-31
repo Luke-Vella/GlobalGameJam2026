@@ -144,7 +144,7 @@ public class EnemyTypeOneManager : MonoBehaviour
         currentTarget = rb.position; //nullify hover target
         //set windUp direction
         engageDirection = (player.position - transform.position).normalized;
-        RotateTowards(engageDirection); //currently wind up will start during rotation
+        StartCoroutine(RotateTowards(engageDirection)); //currently wind up will start during rotation
         isWindingUp = true;
         shakeTime = 0f;
         originalLocalPosition = transform.localPosition;
@@ -193,16 +193,24 @@ public class EnemyTypeOneManager : MonoBehaviour
         isCollided = false;
     }
 
-    void RotateTowards(Vector2 direction)
+    IEnumerator RotateTowards(Vector2 direction)
     {
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        Quaternion targetRotation = Quaternion.Euler(0f, 0f, angle);
+        float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        Quaternion targetRotation = Quaternion.Euler(0f, 0f, targetAngle);
 
-        transform.rotation = Quaternion.RotateTowards(
-            transform.rotation,
-            targetRotation,
-            rotationSpeed * Time.fixedDeltaTime
-        );
+        while (Quaternion.Angle(transform.rotation, targetRotation) > 0.1f)
+        {
+            transform.rotation = Quaternion.RotateTowards(
+                transform.rotation,
+                targetRotation,
+                rotationSpeed * Time.fixedDeltaTime
+            );
+
+            yield return new WaitForFixedUpdate();
+        }
+
+        // Snap exactly at the end
+        transform.rotation = targetRotation;
     }
 
     void ResetMovement()
