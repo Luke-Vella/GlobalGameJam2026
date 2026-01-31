@@ -16,19 +16,16 @@ public class DamageHandler : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        if (other.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
-            // Apply damage to player
-            Debug.Log($"Player hit for {damageAmount} damage");
+            PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
+            playerController.currentOxygen -= damageAmount;
+            Debug.Log($"Player oxygen: {playerController.currentOxygen}/{100f}");
 
             // If this is a projectile, destroy it
             Destroy(gameObject);
-        }
-        else if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
-        {
-            // Projectile hit ground - let ProjectileManager handle this
         }
     }
 }
