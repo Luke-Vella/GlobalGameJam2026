@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 87c1bce578ddb9b4d816a313feaa387f, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.49019608}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.85882354}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -155,3 +155,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7afa53b2a58b4b04ea40ff524eb4f4f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boostAmount: 50
+  boostDuration: 5
+  isGivingOxygen: 0
+  canGiveOxygen: 1
+  timerForNextActivation: 10

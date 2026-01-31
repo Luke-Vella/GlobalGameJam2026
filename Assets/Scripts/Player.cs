@@ -84,17 +84,8 @@ public class PlayerController : MonoBehaviour
 
 
         StateMachine.Update();
-        
-        // Only handle rotation when not boosting
-        if (!IsBoostPressed)
-        {
-            HandleRotation();
-        }
-        else
-        {
-            // Apply drag to rotation velocity when boosting
-            currentRotationVelocity = Mathf.Lerp(currentRotationVelocity, 0f, rotationDrag * Time.deltaTime);
-        }
+
+        HandleRotation();
         
         if (currentMask != null)
         {
@@ -138,7 +129,6 @@ public class PlayerController : MonoBehaviour
         
         if (direction.magnitude < 0.1f)
         {
-            currentRotationVelocity = Mathf.Lerp(currentRotationVelocity, 0f, rotationDrag * Time.deltaTime);
             return;
         }
 
@@ -147,59 +137,11 @@ public class PlayerController : MonoBehaviour
         // Calculate angle in degrees
         float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         
-        // Determine if we should flip the sprite based on angle
-        // If angle is between -90 and 90, face right (no flip)
-        // If angle is beyond that, face left (flip)
-        if (spriteRenderer != null)
-        {
-            if (targetAngle > 90f || targetAngle < -90f)
-            {
-                // Facing left - flip sprite
-                spriteRenderer.flipX = true;
-                isFacingLeft = true;
-                // Adjust angle to keep sprite upright
-                targetAngle -= 180f;
-                
-                // Switch to backward light
-                UpdateLightOrientation(true);
-            }
-            else
-            {
-                // Facing right - normal orientation
-                spriteRenderer.flipX = false;
-                isFacingLeft = false;
-                
-                // Switch to forward light
-                UpdateLightOrientation(false);
-            }
-        }
-
         // Subtract 90 because sprite faces up by default
         targetAngle -= 90f;
 
-        float currentAngle = transform.eulerAngles.z;
-        // Normalize current angle to -180 to 180 range
-        if (currentAngle > 180f)
-        {
-            currentAngle -= 360f;
-        }
-
-        float angleDifference = Mathf.DeltaAngle(currentAngle, targetAngle);
-
-        // Determine if player is moving
-        bool isMoving = MoveInput.magnitude > 0.1f;
-        
-        // Apply rotation speed multiplier when moving
-        float effectiveRotationSpeed = isMoving ? rotationSpeed * movingRotationMultiplier : rotationSpeed;
-        float effectiveMaxRotationSpeed = isMoving ? maxRotationSpeed * movingRotationMultiplier : maxRotationSpeed;
-
-        float targetRotationVelocity = angleDifference * effectiveRotationSpeed;
-        currentRotationVelocity = Mathf.Lerp(currentRotationVelocity, targetRotationVelocity, effectiveRotationSpeed * Time.deltaTime);
-
-        currentRotationVelocity = Mathf.Clamp(currentRotationVelocity, -effectiveMaxRotationSpeed, effectiveMaxRotationSpeed);
-
-        float newAngle = currentAngle + currentRotationVelocity * Time.deltaTime;
-        transform.rotation = Quaternion.Euler(0f, 0f, newAngle);
+        // Directly set rotation without any smoothing or velocity
+        transform.rotation = Quaternion.Euler(0f, 0f, targetAngle);
     }
 
     private void UpdateLightOrientation(bool facingLeft)

@@ -34,12 +34,14 @@ public class EnemyTypeOneManager : MonoBehaviour
     private Rigidbody2D rb;
     private Transform player;
     private Vector2 currentTarget;
+    private Animator animator;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         originalLocalPosition = transform.localPosition;
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        animator = GetComponent<Animator>();
     }
 
     void Start()
@@ -162,6 +164,11 @@ public class EnemyTypeOneManager : MonoBehaviour
 
     void AttackPlayer()
     {
+        if(animator)
+        {
+            animator.SetBool("IsCharging", true);
+        }
+
         transform.localPosition = originalLocalPosition; // stop shake
         rb.velocity = engageDirection * engageSpeed;
         windUpTimer = 0; // reset wind-up
@@ -178,6 +185,8 @@ public class EnemyTypeOneManager : MonoBehaviour
         {
             Debug.Log("Entering Cooldown");
             coolDownTimer += Time.fixedDeltaTime;
+
+            animator.SetBool("IsCharging", false);
 
             if (coolDownTimer >= coolDown)
             {

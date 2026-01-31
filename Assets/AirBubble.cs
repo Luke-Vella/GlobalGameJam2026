@@ -50,10 +50,20 @@ public class AirBubble : MonoBehaviour
         isGivingOxygen = true;
         float boostPerSecond = boostAmount / boostDuration;
         float elapsed = 0f;
+        
+        Color color = spriteRenderer.color;
+        float startAlpha = color.a;
+        
         while (elapsed < boostDuration)
         {
             player.currentOxygen = Mathf.Min(player.currentOxygen + boostPerSecond * Time.deltaTime, 100f);
             elapsed += Time.deltaTime;
+            
+            // Gradually reduce opacity as oxygen is given
+            float progress = elapsed / boostDuration;
+            color.a = Mathf.Lerp(startAlpha, 0.1f, progress);
+            spriteRenderer.color = color;
+            
             yield return null;
         }
 
@@ -65,9 +75,9 @@ public class AirBubble : MonoBehaviour
         canGiveOxygen = false;
         isGivingOxygen = false;
 
-        // reduce opacity of bubble to indicate cooldown
+        // Ensure opacity is at cooldown level
         Color color = spriteRenderer.color;
-        color.a = 0.5f;
+        color.a = 0.1f;
         spriteRenderer.color = color;
 
         activationTimer = timerForNextActivation;

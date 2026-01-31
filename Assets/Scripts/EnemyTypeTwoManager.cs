@@ -29,6 +29,7 @@ public class EnemyTypeTwoManager : MonoBehaviour
 
     private Rigidbody2D rb;
     private Transform player;
+    private Animator animator;
     private Vector2 currentTarget;
 
     void Awake()
@@ -36,6 +37,7 @@ public class EnemyTypeTwoManager : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         originalPosition = (Vector2)transform.position;
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        animator = GetComponent<Animator>();
     }
 
     void Start()
@@ -52,8 +54,8 @@ public class EnemyTypeTwoManager : MonoBehaviour
             CheckForPlayer();
         }
         else if (!isRotating)
-        {
-             ShootPlayer();
+        {            
+            ShootPlayer();
         }
     }
 
