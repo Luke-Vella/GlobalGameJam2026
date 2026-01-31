@@ -7,7 +7,13 @@ public class PauseManager : MonoBehaviour
 {
     public GameObject PauseMenu;
     public GameObject WarningMenu;
+    public GameObject InstructionsMenu;
     public bool isPaused = false;
+
+    void Start()
+    {
+        Time.timeScale = 0f;
+    }
 
     void Update()
     {
@@ -50,15 +56,26 @@ public class PauseManager : MonoBehaviour
 
     }
 
+    public void OpenInstructions()
+    {
+        InstructionsMenu.SetActive(true);
+        PauseMenu.SetActive(false);
+    }
+
+    public void CloseInstructions()
+    {
+        InstructionsMenu.SetActive(false);  // hids InstructionsMenu
+        Resume();
+
+    }
+
     public void MainMenu()
     {
         SceneManager.LoadScene("MainMenu");
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
+
+
 
 }
