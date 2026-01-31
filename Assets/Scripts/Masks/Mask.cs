@@ -4,6 +4,7 @@ public abstract class Mask : MonoBehaviour
 {
     [Header("Mask Properties")]
     public string maskName;
+    public int maskID;
     public Sprite maskIcon;
 
     [Header("Movement Modifiers")]

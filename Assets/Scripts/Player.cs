@@ -243,7 +243,15 @@ public class PlayerController : MonoBehaviour
     public void OnBoost(InputAction.CallbackContext context)
     {
         IsBoostPressed = context.ReadValueAsButton();
-        AudioManager.Instance.PlaySFX(AudioDatabase.Instance.SpeedBoostClip);
+
+        if(IsBoostPressed)
+        {
+            AudioManager.Instance.PlaySFX(AudioDatabase.Instance.SpeedBoostClip);
+        }
+        else
+        {
+            AudioManager.Instance.PlaySFX(AudioDatabase.Instance.SpeedBurstStopClip);
+        }
     }
 
     // Number key inputs for mask selection

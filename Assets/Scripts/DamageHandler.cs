@@ -11,6 +11,7 @@ public class DamageHandler : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
+
             playerController.currentOxygen -= damageAmount;
             Debug.Log($"Player oxygen: {playerController.currentOxygen}/{100f}");
             AudioManager.Instance.PlaySFX(AudioDatabase.Instance.DamageHitClip);

@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maskName: 
+  maskID: 1
   maskIcon: {fileID: 0}
   speedMultiplier: 1
   oxygenConsumptionRate: 1
@@ -211,6 +212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maskName: 
+  maskID: 2
   maskIcon: {fileID: 0}
   speedMultiplier: 1
   oxygenConsumptionRate: 1
@@ -271,6 +273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maskName: 
+  maskID: 0
   maskIcon: {fileID: 0}
   speedMultiplier: 1
   oxygenConsumptionRate: 1
@@ -484,6 +487,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: e065a2e4-32e0-4106-b6b3-371faa9a17ef
     m_ActionName: Gameplay/ActivateSecondaryMaskAbility[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b2630796-3e30-4f0c-b75c-6cf8043366c7
+    m_ActionName: Gameplay/PrimaryAction[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
