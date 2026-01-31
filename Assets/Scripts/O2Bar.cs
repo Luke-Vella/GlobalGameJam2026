@@ -6,7 +6,7 @@ public class BarraTempo : MonoBehaviour
     private float tempoMassimo = 40f;
     private float tempoRimanente;
 
-    private Slider healthSlider;
+    private Slider oxygenSlider;
 
     private Vector2 posizioneIniziale;
     private float altezzaBarra;
@@ -14,7 +14,7 @@ public class BarraTempo : MonoBehaviour
 
     void Start()
     {
-        healthSlider = GetComponent<Slider>();
+        oxygenSlider = GetComponent<Slider>();
 
         tempoRimanente = tempoMassimo;
         _playerController = FindObjectOfType<PlayerController>();
@@ -41,7 +41,7 @@ public class BarraTempo : MonoBehaviour
             //O2Bar.fillAmount = _playerController.currentOxygen;
 
             //empties the slider
-            healthSlider.value = _playerController.currentOxygen/100;
+            oxygenSlider.value = _playerController.currentOxygen/100;
 
             // Sposta il rettangolo verso il basso. 
             // Quando fill è 1 (piena), lo spostamento è 0.

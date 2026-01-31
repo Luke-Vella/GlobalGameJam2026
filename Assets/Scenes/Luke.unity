@@ -197,6 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fuelCellsAcquired: 0
+  fuelCellsRequired: 6
 --- !u!4 &1074625074
 Transform:
   m_ObjectHideFlags: 0
@@ -284,11 +285,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3255073410674910590, guid: 2aa817126b227414caa61eeb5ec7e50c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.2
+      value: 0.54
       objectReference: {fileID: 0}
     - target: {fileID: 3255073410674910590, guid: 2aa817126b227414caa61eeb5ec7e50c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 23.1
+      value: 23.24
       objectReference: {fileID: 0}
     - target: {fileID: 3255073410674910590, guid: 2aa817126b227414caa61eeb5ec7e50c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -398,11 +399,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1799397703097493394, guid: 0072101bdf765e0469e6c5411e1faafa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.2
+      value: 0.54
       objectReference: {fileID: 0}
     - target: {fileID: 1799397703097493394, guid: 0072101bdf765e0469e6c5411e1faafa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 23.1
+      value: 23.24
       objectReference: {fileID: 0}
     - target: {fileID: 1799397703097493394, guid: 0072101bdf765e0469e6c5411e1faafa, type: 3}
       propertyPath: m_LocalPosition.z
