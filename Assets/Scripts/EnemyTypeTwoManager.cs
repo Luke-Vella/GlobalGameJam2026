@@ -8,7 +8,7 @@ public class EnemyTypeTwoManager : MonoBehaviour
     private bool isCollided = false;
     private bool isRotating = false; 
     private bool isOnCooldown = false;
-    private float coolDownTimer = 0f;
+    private float cooldownTimer = 0f;
     private Vector2 lookDirection = new Vector2();
 
     [Header("Hover Settings")]
@@ -18,11 +18,11 @@ public class EnemyTypeTwoManager : MonoBehaviour
 
     [Header("Shooter Settings")]
     public float projectileSpeed = 6f;
-    public float velocityDamping = 4f;
+    public float velocityDamping = 4f; // to move to projectile
     public float playerDetectionRange = 5f;
     public float rotationSpeed = 720f;
-    private Vector3 originalPosition;
-    public float coolDown = 1f;
+    private Vector2 originalPosition;
+    public float shotCooldown = 1f;
     public GameObject projectileObject;
 
     [Header("Physics")]
@@ -35,7 +35,7 @@ public class EnemyTypeTwoManager : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        originalPosition = transform.position;
+        originalPosition = (Vector2)transform.position;
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
@@ -52,17 +52,9 @@ public class EnemyTypeTwoManager : MonoBehaviour
             HoverBehaviour();
             CheckForPlayer();
         }
-        else if (isWindingUp)
+        else if (!isRotating)
         {
-            // Handle winding up state
-            windUpTimer += Time.fixedDeltaTime;
-
-            ApplyShake();
-
-            if (windUpTimer >= windUpDuration)
-            {
-                AttackPlayer();
-            }
+             ShootPlayer();
         }
         else
         {
@@ -128,6 +120,7 @@ public class EnemyTypeTwoManager : MonoBehaviour
 
             if (!hit)
             {
+                Debug.Log("Raycast not blocked");
                 EngagePlayer();
                 return true;
             }
@@ -145,33 +138,44 @@ public class EnemyTypeTwoManager : MonoBehaviour
 
     void ShootPlayer()
     {
-        //spawn gameobject
-        //setup velocity etc
-    }
-
-    void EngageBehaviour() // This needs to move to the projectile class later
-    {
-        // Gradually slow down
-        rb.velocity = Vector2.Lerp(rb.velocity, Vector2.zero, velocityDamping * Time.fixedDeltaTime);
-
-        // When nearly stopped
-        if (rb.velocity.magnitude < 0.2f)
+        if (isOnCooldown)
         {
-            isOnCooldown = true;
-            coolDownTimer += Time.fixedDeltaTime;
-
-            if (coolDownTimer >= coolDown)
+            cooldownTimer += Time.fixedDeltaTime;
+            if (cooldownTimer >= shotCooldown)
             {
                 if (!CheckForPlayer()) //if player no longer in range, go back to hovering
                 {
                     isHovering = true;
                     PickNewHoverTarget();
                 }
-                coolDownTimer = 0; // reset cooldown
+                cooldownTimer = 0; // reset cooldown
                 isOnCooldown = false;
             }
         }
-        isCollided = false;
+        else
+        {
+            //spawn projectile gameobject
+            GameObject projectile = Instantiate(projectileObject, transform.position, Quaternion.identity);
+            Rigidbody2D projectileRb = projectile.GetComponent<Rigidbody2D>();
+
+            //setup velocity movement direction etc
+            projectileRb.velocity = lookDirection * projectileSpeed;
+            isOnCooldown = true;
+        }
+    }
+
+    void EngageBehaviour() // This needs to move to the projectile class
+    {
+        // Gradually slow down
+        rb.velocity = Vector2.Lerp(rb.velocity, Vector2.zero, velocityDamping * Time.fixedDeltaTime);
+
+        // When nearly stopped start floating up
+        if (rb.velocity.magnitude < 0.2f)
+        {
+
+        }
+
+        // when up a certain amount disappear
     }
 
     IEnumerator RotateTowards(Vector2 direction)
