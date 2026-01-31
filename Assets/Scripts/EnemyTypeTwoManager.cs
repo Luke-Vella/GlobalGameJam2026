@@ -18,7 +18,6 @@ public class EnemyTypeTwoManager : MonoBehaviour
 
     [Header("Shooter Settings")]
     public float projectileSpeed = 6f;
-    public float velocityDamping = 4f; // to move to projectile
     public float playerDetectionRange = 5f;
     public float rotationSpeed = 720f;
     private Vector2 originalPosition;
@@ -162,20 +161,6 @@ public class EnemyTypeTwoManager : MonoBehaviour
             }
             isOnCooldown = true;
         }
-    }
-
-    void EngageBehaviour() // This needs to move to the projectile class
-    {
-        // Gradually slow down
-        rb.velocity = Vector2.Lerp(rb.velocity, Vector2.zero, velocityDamping * Time.fixedDeltaTime);
-
-        // When nearly stopped start floating up
-        if (rb.velocity.magnitude < 0.2f)
-        {
-
-        }
-
-        // when up a certain amount disappear
     }
 
     IEnumerator RotateTowards(Vector2 direction)

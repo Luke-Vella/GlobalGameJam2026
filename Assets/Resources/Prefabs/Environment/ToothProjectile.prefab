@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: -1347122247962967387}
   - component: {fileID: 3649368254813736695}
   - component: {fileID: 4102406483424226973}
+  - component: {fileID: 3855128604206598185}
   m_Layer: 0
   m_Name: ToothProjectile
   m_TagString: Untagged
@@ -148,3 +149,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &3855128604206598185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8303463465702044701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd4ea2e33e4d8164a9de52ea16ad9752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityDamping: 1.5
+  floatSpeed: 1
+  floatDistance: 5
