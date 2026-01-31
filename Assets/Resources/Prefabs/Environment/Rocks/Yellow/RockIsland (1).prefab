@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 938963250420361822}
   - component: {fileID: 8069976391641842493}
   - component: {fileID: 1128050804753474227}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RockIsland (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

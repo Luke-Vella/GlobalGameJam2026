@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6389524002240931494}
   - component: {fileID: 9167473944645679829}
   - component: {fileID: 4702408523323270936}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RockSlanted (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

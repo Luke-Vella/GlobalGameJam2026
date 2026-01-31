@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 375223119938200363}
   - component: {fileID: 6004441482969773463}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RockCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
