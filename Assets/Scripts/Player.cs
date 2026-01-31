@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,18 +12,26 @@ public class PlayerController : MonoBehaviour
     public float drag = 2f;
     public float maxSpeed = 10f;
 
+    [Header("Boost Settings")]
+    public float boostMultiplier = 4f;
+
+    [Header("Lumen Mask Settings")]
+    public Light2D lightSource;
+
     [Header("Rotation")]
     public float rotationSpeed = 5f;
     public float maxRotationSpeed = 180f;
     public float rotationDrag = 3f;
+    public float movingRotationMultiplier = 0.3f;
 
     [Header("Mask System")]
-    public Mask[] availableMasks;
+    public Mask[] availableMasks; // Assign masks in order: [0] = Default, [1] = Lumen, [2] = Sonar
     private int currentMaskIndex = 0;
     private Mask currentMask;
 
     public Rigidbody2D Rb { get; private set; }
     public Vector2 MoveInput { get; set; }
+    public bool IsBoostPressed { get; private set; }
 
     public PlayerStateMachine StateMachine { get; private set; }
     public IdleSwimState IdleSwimState { get; private set; }
@@ -50,13 +59,24 @@ public class PlayerController : MonoBehaviour
 
         StateMachine.Initialize(IdleSwimState);
         
+        // Equip default mask (index 0)
         EquipMask(0);
     }
 
     private void Update()
     {
         StateMachine.Update();
-        HandleRotation();
+        
+        // Only handle rotation when not boosting
+        if (!IsBoostPressed)
+        {
+            HandleRotation();
+        }
+        else
+        {
+            // Apply drag to rotation velocity when boosting
+            currentRotationVelocity = Mathf.Lerp(currentRotationVelocity, 0f, rotationDrag * Time.deltaTime);
+        }
         
         if (currentMask != null)
         {
@@ -103,10 +123,17 @@ public class PlayerController : MonoBehaviour
 
         float angleDifference = Mathf.DeltaAngle(currentAngle, targetAngle);
 
-        float targetRotationVelocity = angleDifference * rotationSpeed;
-        currentRotationVelocity = Mathf.Lerp(currentRotationVelocity, targetRotationVelocity, rotationSpeed * Time.deltaTime);
+        // Determine if player is moving
+        bool isMoving = MoveInput.magnitude > 0.1f;
+        
+        // Apply rotation speed multiplier when moving
+        float effectiveRotationSpeed = isMoving ? rotationSpeed * movingRotationMultiplier : rotationSpeed;
+        float effectiveMaxRotationSpeed = isMoving ? maxRotationSpeed * movingRotationMultiplier : maxRotationSpeed;
 
-        currentRotationVelocity = Mathf.Clamp(currentRotationVelocity, -maxRotationSpeed, maxRotationSpeed);
+        float targetRotationVelocity = angleDifference * effectiveRotationSpeed;
+        currentRotationVelocity = Mathf.Lerp(currentRotationVelocity, targetRotationVelocity, effectiveRotationSpeed * Time.deltaTime);
+
+        currentRotationVelocity = Mathf.Clamp(currentRotationVelocity, -effectiveMaxRotationSpeed, effectiveMaxRotationSpeed);
 
         float newAngle = currentAngle + currentRotationVelocity * Time.deltaTime;
         transform.rotation = Quaternion.Euler(0f, 0f, newAngle);
@@ -126,6 +153,14 @@ public class PlayerController : MonoBehaviour
     private void EquipMask(int index)
     {
         if (index < 0 || index >= availableMasks.Length) return;
+        if (availableMasks[index] == null) return;
+
+        // Don't re-equip if already equipped
+        if (currentMaskIndex == index && currentMask != null)
+        {
+            Debug.Log($"Mask {index} already equipped");
+            return;
+        }
 
         // Unequip current mask
         if (currentMask != null)
@@ -155,6 +190,46 @@ public class PlayerController : MonoBehaviour
         MoveInput = context.ReadValue<Vector2>();
     }
 
+    public void OnBoost(InputAction.CallbackContext context)
+    {
+        IsBoostPressed = context.ReadValueAsButton();
+    }
+
+    // Number key inputs for mask selection
+    public void OnMaskSlot0(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            EquipMask(0);
+        }
+    }
+
+    public void OnMaskSlot1(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            EquipMask(1);
+        }
+    }
+
+    public void OnMaskSlot2(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            EquipMask(2);
+        }
+    }
+
+    // 'E' key to activate current mask ability
+    public void OnActivateMaskAbility(InputAction.CallbackContext context)
+    {
+        if (context.performed && currentMask != null)
+        {
+            currentMask.UsePrimaryAbility();
+        }
+    }
+
+    // Keep old cycling method for compatibility
     public void OnCycleMask(InputAction.CallbackContext context)
     {
         if (context.performed)
