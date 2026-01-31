@@ -5,6 +5,7 @@ using UnityEngine;
 public class FuelCellManager : MonoBehaviour
 {
     public int fuelCellsAcquired = 0;
+    public int fuelCellsRequired = 4;
 
     public static FuelCellManager Instance { get; private set; }
 
