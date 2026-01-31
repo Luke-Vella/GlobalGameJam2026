@@ -137,7 +137,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -161,15 +161,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c5129e6f38bb7846a4fb4c0005766cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverRadius: 4
-  hoverSpeed: 1.5
+  hoverRadius: 7
+  hoverSpeed: 2
   hoverPointTolerance: 0.2
-  projectileSpeed: 6
+  projectileSpeed: 15
   velocityDamping: 4
-  playerDetectionRange: 5
+  playerDetectionRange: 8
   rotationSpeed: 720
-  shotCooldown: 1
+  shotCooldown: 1.5
   projectileObject: {fileID: 8303463465702044701, guid: 530642e561a2e154d8dc677da182379a, type: 3}
   obstacleMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8

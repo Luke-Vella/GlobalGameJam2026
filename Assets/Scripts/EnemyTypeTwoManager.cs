@@ -56,10 +56,6 @@ public class EnemyTypeTwoManager : MonoBehaviour
         {
              ShootPlayer();
         }
-        else
-        {
-            EngageBehaviour();
-        }
     }
 
     // =========================
@@ -132,7 +128,7 @@ public class EnemyTypeTwoManager : MonoBehaviour
     {
         isHovering = false;
         currentTarget = rb.position; //nullify hover target
-        lookDirection = (player.position - transform.position).normalized;
+        lookDirection = (player.position - transform.position.normalized).normalized;
         StartCoroutine(RotateTowards(lookDirection));
     }
 
@@ -154,12 +150,16 @@ public class EnemyTypeTwoManager : MonoBehaviour
         }
         else
         {
-            //spawn projectile gameobject
-            GameObject projectile = Instantiate(projectileObject, transform.position, Quaternion.identity);
-            Rigidbody2D projectileRb = projectile.GetComponent<Rigidbody2D>();
+            // projectile spawning
+            Vector3 spawnPosition = transform.position + (Vector3)lookDirection * 0.5f; // Spawn slightly ahead
+            GameObject projectile = Instantiate(projectileObject, spawnPosition, Quaternion.identity);
 
-            //setup velocity movement direction etc
-            projectileRb.velocity = lookDirection * projectileSpeed;
+            // Ensure the projectile has a Rigidbody2D component
+            Rigidbody2D projectileRb = projectile.GetComponent<Rigidbody2D>();
+            if (projectileRb != null)
+            {
+                projectileRb.velocity = lookDirection * projectileSpeed;
+            }
             isOnCooldown = true;
         }
     }
