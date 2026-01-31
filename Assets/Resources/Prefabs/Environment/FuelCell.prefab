@@ -433,7 +433,55 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9f268f6a-5d34-4eb5-9ca4-6d963f181666
+    m_ActionName: Gameplay/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a03577ce-51c7-4c08-bb03-fac1a9abee41
+    m_ActionName: Gameplay/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 31e7b530-84e2-4785-b386-fcbafcfdde6d
+    m_ActionName: Gameplay/Boost[/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6362309466294014369}
+        m_TargetAssemblyTypeName: FuelCell, Assembly-CSharp
+        m_MethodName: OnPrimaryActionPressed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b2630796-3e30-4f0c-b75c-6cf8043366c7
+    m_ActionName: Gameplay/PrimaryAction[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 994f86c6-6e94-4220-800e-3fc732a02ecc
+    m_ActionName: Gameplay/EquipDefaultMask[/Keyboard/1]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d89d9e72-3841-45e3-a5e9-2e45c8043ed5
+    m_ActionName: Gameplay/EquipLumenMask[/Keyboard/2]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b6727474-45dc-4503-bfb7-ce35767b7f21
+    m_ActionName: Gameplay/EquipSonarMask[/Keyboard/3]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 34fda64e-84fc-4a55-b2f1-b39676f04e8e
+    m_ActionName: Gameplay/ActivatePrimaryMaskAbility[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e065a2e4-32e0-4106-b6b3-371faa9a17ef
+    m_ActionName: Gameplay/ActivateSecondaryMaskAbility[/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay

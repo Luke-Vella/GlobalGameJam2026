@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class FuelCell : MonoBehaviour
 {
@@ -25,6 +26,18 @@ public class FuelCell : MonoBehaviour
                 fuelCellText.enabled = true;
             }
             isWithinRange = true;
+        }
+    }
+
+    public void OnPrimaryActionPressed(InputAction.CallbackContext context)
+    {
+        if (context.performed && isWithinRange)
+        {
+            // Increment fuel cell count in FuelCellManager
+            FuelCellManager.Instance.fuelCellsAcquired += 1;
+
+            // Destroy the fuel cell object
+            Destroy(this.gameObject);
         }
     }
 
