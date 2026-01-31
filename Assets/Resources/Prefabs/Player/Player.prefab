@@ -443,8 +443,7 @@ MonoBehaviour:
   drag: 2
   maxSpeed: 10
   boostMultiplier: 2
-  lightForward: {fileID: 5211022834825026807}
-  lightBackward: {fileID: 7007913762646151758}
+  lightSource: {fileID: 0}
   rotationSpeed: 5
   maxRotationSpeed: 180
   rotationDrag: 3
