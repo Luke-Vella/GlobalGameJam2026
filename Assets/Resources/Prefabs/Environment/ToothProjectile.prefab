@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3649368254813736695}
   - component: {fileID: 4102406483424226973}
   - component: {fileID: 3855128604206598185}
+  - component: {fileID: 7251595288154034528}
   m_Layer: 0
   m_Name: ToothProjectile
   m_TagString: Untagged
@@ -163,4 +164,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityDamping: 1.5
   floatSpeed: 1
-  floatDistance: 5
+  floatTime: 10
+--- !u!114 &7251595288154034528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8303463465702044701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50b6467e33c73924f8db1a39efc5418a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 50

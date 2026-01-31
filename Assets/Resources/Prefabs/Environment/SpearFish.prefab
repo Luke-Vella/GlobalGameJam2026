@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4827504119910775225}
   - component: {fileID: 7306697776220022613}
   - component: {fileID: 1088130363161246055}
+  - component: {fileID: 172800568979110716}
   m_Layer: 0
   m_Name: SpearFish
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 599938478945083217}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.06, y: -1.73, z: 0.09775595}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -99,8 +100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 366ef3b6195c3da42b59e2dd932b6e3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isHovering: 1
-  isWindingUp: 0
   hoverRadius: 3
   hoverSpeed: 1.5
   hoverPointTolerance: 0.2
@@ -109,6 +108,8 @@ MonoBehaviour:
   playerDetectionRange: 10
   rotationSpeed: 720
   windUpDuration: 1.5
+  shakeIntensity: 0.08
+  shakeFrequency: 35
   coolDown: 1
   obstacleMask:
     serializedVersion: 2
@@ -175,3 +176,16 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.2113333}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &172800568979110716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599938478945083217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50b6467e33c73924f8db1a39efc5418a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 50
