@@ -100,11 +100,15 @@ public class SwimState : PlayerState
 
     public override void FixedUpdate()
     {
+        // Calculate effective swim speed based on boost
+        float effectiveSpeed = player.IsBoostPressed ? player.swimSpeed * player.boostMultiplier : player.swimSpeed;
+
         // Full 2D movement - both X and Y axes
-        Vector2 swimForce = player.MoveInput.normalized * player.swimSpeed;
+        Vector2 swimForce = player.MoveInput.normalized * effectiveSpeed;
         player.Rb.AddForce(swimForce, ForceMode2D.Force);
         
-        // Apply constant downward pull - player must swim up to counteract
-        player.Rb.AddForce(Vector2.down * sinkSpeed, ForceMode2D.Force);
+        // Apply constant downward pull - reduce during boost
+        float effectiveSinkSpeed = player.IsBoostPressed ? sinkSpeed * 0.5f : sinkSpeed;
+        player.Rb.AddForce(Vector2.down * effectiveSinkSpeed, ForceMode2D.Force);
     }
 }
