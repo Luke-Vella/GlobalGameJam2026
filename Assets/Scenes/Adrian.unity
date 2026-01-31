@@ -1104,6 +1104,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpearFish
       objectReference: {fileID: 0}
+    - target: {fileID: 4827504119910775225, guid: ffe70cd614186744ba53bc0711dacefb, type: 3}
+      propertyPath: engageSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4827504119910775225, guid: ffe70cd614186744ba53bc0711dacefb, type: 3}
+      propertyPath: shakeIntensity
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4827504119910775225, guid: ffe70cd614186744ba53bc0711dacefb, type: 3}
+      propertyPath: velocityDamping
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
