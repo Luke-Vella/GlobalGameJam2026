@@ -1,39 +1,58 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
     public GameObject PauseMenu;
+    public GameObject WarningMenu;
     public bool isPaused = false;
 
     void Update()
     {
-        // Controlliamo se il giocatore preme il tasto Escape
+        // if player plays ESC
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (isPaused)
             {
-                Resume(); // Se è già in pausa, torna a giocare
+                Resume(); // if paused, resume
             }
             else
             {
-                Pause();  // Se sta giocando, metti in pausa
+                Pause();  // if not paused, pause
             }
         }
     }
     public void Resume()
     {
-        PauseMenu.SetActive(false); // Nasconde il menu UI
-        Time.timeScale = 1f;          // Riporta il tempo alla velocità normale
-        isPaused = false;             // Aggiorna lo stato
+        PauseMenu.SetActive(false); // hids UI
+        Time.timeScale = 1f;          // time back to normal
+        isPaused = false;
     }
 
     void Pause()
     {
-        PauseMenu.SetActive(true);  // Mostra il menu UI
-        Time.timeScale = 0f;          // "Congela" il mondo di gioco
-        isPaused = true;              // Aggiorna lo stato
+        PauseMenu.SetActive(true);  // shows UI
+        Time.timeScale = 0f;          // time is blocked
+        isPaused = true;
+    }
+
+    public void OpenWarning()
+    {
+        WarningMenu.SetActive(true);  // shows warning
+
+    }
+
+    public void CloseWarning()
+    {
+        WarningMenu.SetActive(false);  // hids warning
+
+    }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 
     // Start is called before the first frame update
