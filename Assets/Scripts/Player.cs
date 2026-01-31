@@ -112,6 +112,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    [ContextMenu("Test Flip")]
+    private void HandleFlip()
+    {
+        Debug.Log("Handled");
+    }
+
+
     private void HandleRotation()
     {
         Vector2 mouseScreenPos = Mouse.current.position.ReadValue();
