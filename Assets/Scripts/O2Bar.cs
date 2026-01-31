@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class BarraTempo : MonoBehaviour
 {
     public Image O2Bar; 
-    public float tempoMassimo = 10f;
+    private float tempoMassimo = 40f;
     private float tempoRimanente;
 
     private Vector2 posizioneIniziale;
