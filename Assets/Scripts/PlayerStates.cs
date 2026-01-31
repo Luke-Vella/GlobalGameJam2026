@@ -53,6 +53,8 @@ public class FallState : PlayerState
 
 public class IdleSwimState : PlayerState
 {
+    private float sinkSpeed = 0.5f; // Adjust this value to control descent speed
+
     public IdleSwimState(PlayerController player, PlayerStateMachine stateMachine) : base(player, stateMachine) { }
 
     public override void Enter()
@@ -71,13 +73,15 @@ public class IdleSwimState : PlayerState
 
     public override void FixedUpdate()
     {
-        // Natural deceleration from drag - no additional velocity changes
-        // The Rigidbody2D drag will naturally slow the player down
+        // Apply slow downward force to simulate sinking
+        player.Rb.velocity = new Vector2(player.Rb.velocity.x, -sinkSpeed);
     }
 }
 
 public class SwimState : PlayerState
 {
+    private float sinkSpeed = 0.5f; // Constant downward pull
+
     public SwimState(PlayerController player, PlayerStateMachine stateMachine) : base(player, stateMachine) { }
 
     public override void Enter()
@@ -99,5 +103,8 @@ public class SwimState : PlayerState
         // Full 2D movement - both X and Y axes
         Vector2 swimForce = player.MoveInput.normalized * player.swimSpeed;
         player.Rb.AddForce(swimForce, ForceMode2D.Force);
+        
+        // Apply constant downward pull - player must swim up to counteract
+        player.Rb.AddForce(Vector2.down * sinkSpeed, ForceMode2D.Force);
     }
 }
