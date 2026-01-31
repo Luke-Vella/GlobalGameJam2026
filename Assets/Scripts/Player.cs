@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     public float maxRotationSpeed = 180f;
     public float rotationDrag = 3f;
     public float movingRotationMultiplier = 0.3f;
+    public float currentOxygen = 100f;
 
     [Header("Sprite Settings")]
     public SpriteRenderer spriteRenderer;
@@ -76,6 +77,12 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if(currentOxygen <= 0f)
+        {
+            GameStateManager.Instance.Restart();
+        }
+
+
         StateMachine.Update();
         
         // Only handle rotation when not boosting
@@ -113,6 +120,7 @@ public class PlayerController : MonoBehaviour
     }
 
     [ContextMenu("Test Flip")]
+
     private void HandleFlip()
     {
         Debug.Log("Handled");

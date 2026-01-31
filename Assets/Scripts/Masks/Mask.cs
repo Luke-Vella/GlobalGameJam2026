@@ -17,6 +17,13 @@ public abstract class Mask : MonoBehaviour
         player = playerController;
     }
 
+    private void Update()
+    {
+        player.currentOxygen -= oxygenConsumptionRate * Time.deltaTime;
+
+        Debug.Log($"Mask: {maskName}, Current Oxygen level : {player.currentOxygen}");  
+    }
+
     public virtual void OnEquip()
     {
         Debug.Log($"Equipped {maskName}");
