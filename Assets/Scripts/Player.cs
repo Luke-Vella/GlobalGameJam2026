@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Lumen Mask Settings")]
     public Light2D lightForward;
-    public Light2D lightBackward;
+    public Light2D lightAround;
 
     [Header("Rotation")]
     public float rotationSpeed = 5f;
@@ -145,45 +145,14 @@ public class PlayerController : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, 0f, targetAngle);
     }
 
-    private void UpdateLightOrientation(bool facingLeft)
-    {
-        if (lightForward == null || lightBackward == null) return;
-
-        if (facingLeft)
-        {
-            // Use backward light when facing left
-            if (lightForward.enabled)
-            {
-                bool wasOn = lightForward.enabled;
-                lightForward.enabled = false;
-                lightBackward.enabled = wasOn; // Preserve on/off state
-            }
-        }
-        else
-        {
-            // Use forward light when facing right
-            if (lightBackward.enabled || !lightForward.enabled)
-            {
-                bool wasOn = lightBackward.enabled;
-                lightBackward.enabled = false;
-                lightForward.enabled = wasOn; // Preserve on/off state
-            }
-        }
-    }
 
     public void SetLightState(bool isOn)
     {
-        // Public method to turn lights on/off (called by LumenMask)
-        if (isFacingLeft)
-        {
-            if (lightBackward != null)
-                lightBackward.enabled = isOn;
-        }
-        else
-        {
-            if (lightForward != null)
-                lightForward.enabled = isOn;
-        }
+        if (lightForward != null)
+            lightForward.enabled = isOn;
+
+        if(lightAround != null)
+            lightAround.enabled = isOn;
     }
 
     private void InitializeMasks()
