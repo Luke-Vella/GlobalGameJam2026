@@ -12,9 +12,14 @@ public class PlayerController : MonoBehaviour
     public float maxSpeed = 10f;
 
     [Header("Rotation")]
-    public float rotationSpeed = 5f; // How quickly rotation accelerates
-    public float maxRotationSpeed = 180f; // Maximum degrees per second
-    public float rotationDrag = 3f; // How quickly rotation decelerates
+    public float rotationSpeed = 5f;
+    public float maxRotationSpeed = 180f;
+    public float rotationDrag = 3f;
+
+    [Header("Mask System")]
+    public Mask[] availableMasks;
+    private int currentMaskIndex = 0;
+    private Mask currentMask;
 
     public Rigidbody2D Rb { get; private set; }
     public Vector2 MoveInput { get; set; }
@@ -24,7 +29,7 @@ public class PlayerController : MonoBehaviour
     public SwimState SwimState { get; private set; }
 
     private Camera mainCamera;
-    private float currentRotationVelocity = 0f; // Current rotation speed
+    private float currentRotationVelocity = 0f;
 
     private void Awake()
     {
@@ -34,77 +39,148 @@ public class PlayerController : MonoBehaviour
         StateMachine = new PlayerStateMachine();
         IdleSwimState = new IdleSwimState(this, StateMachine);
         SwimState = new SwimState(this, StateMachine);
+
+        InitializeMasks();
     }
 
     private void Start()
     {
-        // Configure Rigidbody2D for underwater physics
-        Rb.gravityScale = 0f; // No gravity underwater
+        Rb.gravityScale = 0f;
         Rb.drag = drag;
 
         StateMachine.Initialize(IdleSwimState);
+        
+        EquipMask(0);
     }
 
     private void Update()
     {
         StateMachine.Update();
         HandleRotation();
+        
+        if (currentMask != null)
+        {
+            currentMask.UpdateMask();
+        }
     }
 
     private void FixedUpdate()
     {
         StateMachine.FixedUpdate();
 
-        // Clamp velocity to max speed
-        if (Rb.velocity.magnitude > maxSpeed)
+        // Apply mask speed multiplier
+        float effectiveMaxSpeed = maxSpeed;
+        if (currentMask != null)
         {
-            Rb.velocity = Rb.velocity.normalized * maxSpeed;
+            effectiveMaxSpeed *= currentMask.speedMultiplier;
+        }
+
+        if (Rb.velocity.magnitude > effectiveMaxSpeed)
+        {
+            Rb.velocity = Rb.velocity.normalized * effectiveMaxSpeed;
         }
     }
 
     private void HandleRotation()
     {
-        // Get mouse position directly from Unity's input system
         Vector2 mouseScreenPos = Mouse.current.position.ReadValue();
         
-        // Convert to world space
         Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(new Vector3(mouseScreenPos.x, mouseScreenPos.y, mainCamera.nearClipPlane));
         mouseWorldPos.z = 0f;
 
-        // Calculate direction from player to mouse
         Vector2 direction = (mouseWorldPos - transform.position);
         
-        // Only rotate if there's meaningful distance (prevents jittering when mouse is on player)
         if (direction.magnitude < 0.1f)
         {
-            // Apply drag when not rotating
             currentRotationVelocity = Mathf.Lerp(currentRotationVelocity, 0f, rotationDrag * Time.deltaTime);
             return;
         }
 
         direction.Normalize();
 
-        // Calculate target angle in degrees
         float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
         float currentAngle = transform.eulerAngles.z;
 
-        // Calculate the shortest angle difference
         float angleDifference = Mathf.DeltaAngle(currentAngle, targetAngle);
 
-        // Accelerate rotation velocity towards the target
         float targetRotationVelocity = angleDifference * rotationSpeed;
         currentRotationVelocity = Mathf.Lerp(currentRotationVelocity, targetRotationVelocity, rotationSpeed * Time.deltaTime);
 
-        // Clamp rotation velocity
         currentRotationVelocity = Mathf.Clamp(currentRotationVelocity, -maxRotationSpeed, maxRotationSpeed);
 
-        // Apply rotation with momentum
         float newAngle = currentAngle + currentRotationVelocity * Time.deltaTime;
         transform.rotation = Quaternion.Euler(0f, 0f, newAngle);
+    }
+
+    private void InitializeMasks()
+    {
+        foreach (Mask mask in availableMasks)
+        {
+            if (mask != null)
+            {
+                mask.Initialize(this);
+            }
+        }
+    }
+
+    private void EquipMask(int index)
+    {
+        if (index < 0 || index >= availableMasks.Length) return;
+
+        // Unequip current mask
+        if (currentMask != null)
+        {
+            currentMask.OnUnequip();
+        }
+
+        // Equip new mask
+        currentMaskIndex = index;
+        currentMask = availableMasks[currentMaskIndex];
+        
+        if (currentMask != null)
+        {
+            currentMask.OnEquip();
+        }
+    }
+
+    public void CycleMask(bool forward = true)
+    {
+        int direction = forward ? 1 : -1;
+        int newIndex = (currentMaskIndex + direction + availableMasks.Length) % availableMasks.Length;
+        EquipMask(newIndex);
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
         MoveInput = context.ReadValue<Vector2>();
+    }
+
+    public void OnCycleMask(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            CycleMask(true);
+        }
+    }
+
+    public void OnMaskPrimaryAbility(InputAction.CallbackContext context)
+    {
+        if (context.performed && currentMask != null)
+        {
+            currentMask.UsePrimaryAbility();
+        }
+    }
+
+    public void OnMaskSecondaryAbility(InputAction.CallbackContext context)
+    {
+        if (context.performed && currentMask != null)
+        {
+            currentMask.UseSecondaryAbility();
+        }
+    }
+
+    public Mask GetCurrentMask()
+    {
+        return currentMask;
     }
 }

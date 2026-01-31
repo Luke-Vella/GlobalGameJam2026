@@ -1,18 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class DefaultMask : MonoBehaviour
+public class DefaultMask : Mask
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("Default Mask Settings")]
+    public float extraOxygenCapacity = 100f;
+    public float bonusSwimSpeed = 1.2f;
+
+    public override void Initialize(PlayerController playerController)
     {
-        
+        base.Initialize(playerController);
+        maskName = "Default Mask";
+        speedMultiplier = bonusSwimSpeed;
+        oxygenConsumptionRate = 0.8f; // Uses less oxygen
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void OnEquip()
     {
-        
+        base.OnEquip();
+        // Apply default mask benefits
+    }
+
+    public override void OnUnequip()
+    {
+        base.OnUnequip();
+        // Remove default mask benefits
+    }
+
+    public override void UpdateMask()
+    {
+        // Default mask has no active abilities
     }
 }
