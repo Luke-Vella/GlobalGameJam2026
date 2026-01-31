@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4539667534279479214}
   - component: {fileID: 2721460486399528375}
   - component: {fileID: 3727475044058196453}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RockVertical
   m_TagString: Untagged
   m_Icon: {fileID: 0}
