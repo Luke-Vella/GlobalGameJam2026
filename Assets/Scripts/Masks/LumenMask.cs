@@ -31,7 +31,7 @@ public class LumenMask : Mask
 
     public override void UpdateMask()
     {
-        // Light is attached to player, no need to update position/rotation
+        // Light orientation is handled by PlayerController
     }
 
     public override void UsePrimaryAbility()
@@ -57,18 +57,12 @@ public class LumenMask : Mask
 
     private void TurnOnLight()
     {
-        if (player.lightSource != null)
-        {
-            player.lightSource.enabled = true;
-        }
+        player.SetLightState(true);
     }
 
     private void TurnOffLight()
     {
-        if (player.lightSource != null)
-        {
-            player.lightSource.enabled = false;
-            isLightOn = false;
-        }
+        player.SetLightState(false);
+        isLightOn = false;
     }
 }
