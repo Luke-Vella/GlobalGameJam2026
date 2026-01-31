@@ -1,32 +1,5 @@
 using UnityEngine;
 
-public class IdleState : PlayerState
-{
-    public IdleState(PlayerController player, PlayerStateMachine stateMachine) : base(player, stateMachine) { }
-
-    public override void Enter()
-    {
-        Debug.Log("Entered Idle State");
-    }
-
-    public override void Update()
-    {
-        if (player.MoveInput.x != 0)
-        {
-            stateMachine.ChangeState(player.MoveState);
-        }
-        else if (!player.IsGrounded)
-        {
-            stateMachine.ChangeState(player.FallState);
-        }
-    }
-
-    public override void FixedUpdate()
-    {
-        player.Rb.velocity = new Vector2(0, player.Rb.velocity.y);
-    }
-}
-
 public class MoveState : PlayerState
 {
     public MoveState(PlayerController player, PlayerStateMachine stateMachine) : base(player, stateMachine) { }
@@ -40,41 +13,13 @@ public class MoveState : PlayerState
     {
         if (player.MoveInput.x == 0)
         {
-            stateMachine.ChangeState(player.IdleState);
-        }
-        else if (!player.IsGrounded)
-        {
-            stateMachine.ChangeState(player.FallState);
+            stateMachine.ChangeState(player.IdleSwimState);
         }
     }
 
     public override void FixedUpdate()
     {
-        player.Rb.velocity = new Vector2(player.MoveInput.x * player.speed, player.Rb.velocity.y);
-    }
-}
-
-public class JumpState : PlayerState
-{
-    public JumpState(PlayerController player, PlayerStateMachine stateMachine) : base(player, stateMachine) { }
-
-    public override void Enter()
-    {
-        Debug.Log("Entered Jump State");
-        player.Rb.velocity = new Vector2(player.Rb.velocity.x, player.jumpForce);
-    }
-
-    public override void Update()
-    {
-        if (player.Rb.velocity.y < 0)
-        {
-            stateMachine.ChangeState(player.FallState);
-        }
-    }
-
-    public override void FixedUpdate()
-    {
-        player.Rb.velocity = new Vector2(player.MoveInput.x * player.speed, player.Rb.velocity.y);
+        player.Rb.velocity = new Vector2(player.MoveInput.x * player.swimSpeed, player.Rb.velocity.y);
     }
 }
 
@@ -89,21 +34,70 @@ public class FallState : PlayerState
 
     public override void Update()
     {
-        if (player.IsGrounded)
+        if (player.MoveInput.x != 0)
         {
-            if (player.MoveInput.x != 0)
-            {
-                stateMachine.ChangeState(player.MoveState);
-            }
-            else
-            {
-                stateMachine.ChangeState(player.IdleState);
-            }
+            stateMachine.ChangeState(player.SwimState);
+        }
+        else
+        {
+            stateMachine.ChangeState(player.IdleSwimState);
+        }
+
+    }
+
+    public override void FixedUpdate()
+    {
+        player.Rb.velocity = new Vector2(player.MoveInput.x * player.swimSpeed, player.Rb.velocity.y);
+    }
+}
+
+public class IdleSwimState : PlayerState
+{
+    public IdleSwimState(PlayerController player, PlayerStateMachine stateMachine) : base(player, stateMachine) { }
+
+    public override void Enter()
+    {
+        Debug.Log("Entered Idle Swim State - Floating");
+    }
+
+    public override void Update()
+    {
+        // Check if player is giving any movement input
+        if (player.MoveInput.magnitude > 0.1f)
+        {
+            stateMachine.ChangeState(player.SwimState);
         }
     }
 
     public override void FixedUpdate()
     {
-        player.Rb.velocity = new Vector2(player.MoveInput.x * player.speed, player.Rb.velocity.y);
+        // Natural deceleration from drag - no additional velocity changes
+        // The Rigidbody2D drag will naturally slow the player down
+    }
+}
+
+public class SwimState : PlayerState
+{
+    public SwimState(PlayerController player, PlayerStateMachine stateMachine) : base(player, stateMachine) { }
+
+    public override void Enter()
+    {
+        Debug.Log("Entered Swim State - Swimming");
+    }
+
+    public override void Update()
+    {
+        // Return to idle when no input
+        if (player.MoveInput.magnitude < 0.1f)
+        {
+            stateMachine.ChangeState(player.IdleSwimState);
+        }
+    }
+
+    public override void FixedUpdate()
+    {
+        // Full 2D movement - both X and Y axes
+        Vector2 swimForce = player.MoveInput.normalized * player.swimSpeed;
+        player.Rb.AddForce(swimForce, ForceMode2D.Force);
     }
 }

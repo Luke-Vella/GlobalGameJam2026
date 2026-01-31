@@ -6,50 +6,50 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Movement")]
-    public float speed = 5f;
-    public float jumpForce = 10f;
-
-    [Header("Ground Check")]
-    public LayerMask groundLayer;
-    public Transform groundCheck;
-    public float groundCheckRadius = 0.2f;
+    [Header("Underwater Movement")]
+    public float swimSpeed = 5f;
+    public float drag = 2f;
+    public float maxSpeed = 10f;
 
     public Rigidbody2D Rb { get; private set; }
     public Vector2 MoveInput { get; set; }
-    public bool IsGrounded { get; set; }
 
     public PlayerStateMachine StateMachine { get; private set; }
-    public IdleState IdleState { get; private set; }
-    public MoveState MoveState { get; private set; }
-    public JumpState JumpState { get; private set; }
-    public FallState FallState { get; private set; }
+    public IdleSwimState IdleSwimState { get; private set; }
+    public SwimState SwimState { get; private set; }
 
     private void Awake()
     {
         Rb = GetComponent<Rigidbody2D>();
 
         StateMachine = new PlayerStateMachine();
-        IdleState = new IdleState(this, StateMachine);
-        MoveState = new MoveState(this, StateMachine);
-        JumpState = new JumpState(this, StateMachine);
-        FallState = new FallState(this, StateMachine);
+        IdleSwimState = new IdleSwimState(this, StateMachine);
+        SwimState = new SwimState(this, StateMachine);
     }
 
     private void Start()
     {
-        StateMachine.Initialize(IdleState);
+        // Configure Rigidbody2D for underwater physics
+        Rb.gravityScale = 0f; // No gravity underwater
+        Rb.drag = drag;
+
+        StateMachine.Initialize(IdleSwimState);
     }
 
     private void Update()
     {
-        CheckGround();
         StateMachine.Update();
     }
 
     private void FixedUpdate()
     {
         StateMachine.FixedUpdate();
+
+        // Clamp velocity to max speed
+        if (Rb.velocity.magnitude > maxSpeed)
+        {
+            Rb.velocity = Rb.velocity.normalized * maxSpeed;
+        }
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -59,23 +59,6 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.performed && IsGrounded)
-        {
-            StateMachine.ChangeState(JumpState);
-        }
-    }
-
-    private void CheckGround()
-    {
-        IsGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        if (groundCheck != null)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
-        }
+        // Jump removed - underwater movement only
     }
 }
