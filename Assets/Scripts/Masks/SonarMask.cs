@@ -26,6 +26,11 @@ public class SonarMask : Mask
         oxygenConsumptionRate = 1.3f;
     }
 
+    public override void UsePrimaryAbility()
+    {
+        AudioManager.Instance.PlaySFX(AudioDatabase.Instance.SonarOnOffClip);
+    }
+
     public override void OnEquip()
     {
         base.OnEquip();

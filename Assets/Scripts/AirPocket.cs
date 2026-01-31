@@ -42,6 +42,7 @@ public class AirPocket : MonoBehaviour
     public void GiveGradualOxygen(PlayerController player)
     {
         player.StartCoroutine(GradualOxygenBoost(player));
+        AudioManager.Instance.PlaySFX(AudioDatabase.Instance.AirPocketClip);
     }
 
     public IEnumerator GradualOxygenBoost(PlayerController player)
@@ -52,7 +53,8 @@ public class AirPocket : MonoBehaviour
         
         Color color = spriteRenderer.color;
         float startAlpha = color.a;
-        
+
+
         while (elapsed < boostDuration)
         {
             player.currentOxygen = Mathf.Min(player.currentOxygen + boostPerSecond * Time.deltaTime, 100f);

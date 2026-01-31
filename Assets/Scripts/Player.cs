@@ -80,6 +80,7 @@ public class PlayerController : MonoBehaviour
         if(currentOxygen <= 0f)
         {
             GameStateManager.Instance.Restart();
+            AudioManager.Instance.PlaySFX(AudioDatabase.Instance.GameOverClip);
         }
 
 
@@ -201,6 +202,7 @@ public class PlayerController : MonoBehaviour
         if (index < 0 || index >= availableMasks.Length) return;
         if (availableMasks[index] == null) return;
 
+
         // Don't re-equip if already equipped
         if (currentMaskIndex == index && currentMask != null)
         {
@@ -217,7 +219,9 @@ public class PlayerController : MonoBehaviour
         // Equip new mask
         currentMaskIndex = index;
         currentMask = availableMasks[currentMaskIndex];
-        
+
+        AudioManager.Instance.PlaySFX(AudioDatabase.Instance.ToggleBetweenMasksClip);
+
         if (currentMask != null)
         {
             currentMask.OnEquip();
@@ -239,6 +243,7 @@ public class PlayerController : MonoBehaviour
     public void OnBoost(InputAction.CallbackContext context)
     {
         IsBoostPressed = context.ReadValueAsButton();
+        AudioManager.Instance.PlaySFX(AudioDatabase.Instance.SpeedBoostClip);
     }
 
     // Number key inputs for mask selection

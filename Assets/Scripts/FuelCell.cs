@@ -36,6 +36,8 @@ public class FuelCell : MonoBehaviour
             // Increment fuel cell count in FuelCellManager
             FuelCellManager.Instance.fuelCellsAcquired += 1;
 
+            AudioManager.Instance.PlaySFX(AudioDatabase.Instance.PickingUpFuelCellClip);
+
             // Destroy the fuel cell object
             Destroy(this.gameObject);
         }

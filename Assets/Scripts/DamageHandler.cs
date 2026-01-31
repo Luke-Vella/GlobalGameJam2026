@@ -13,6 +13,7 @@ public class DamageHandler : MonoBehaviour
             PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
             playerController.currentOxygen -= damageAmount;
             Debug.Log($"Player oxygen: {playerController.currentOxygen}/{100f}");
+            AudioManager.Instance.PlaySFX(AudioDatabase.Instance.DamageHitClip);
         }
     }
 
@@ -23,6 +24,7 @@ public class DamageHandler : MonoBehaviour
             PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
             playerController.currentOxygen -= damageAmount;
             Debug.Log($"Player oxygen: {playerController.currentOxygen}/{100f}");
+            AudioManager.Instance.PlaySFX(AudioDatabase.Instance.DamageHitClip);
 
             // If this is a projectile, destroy it
             Destroy(gameObject);
