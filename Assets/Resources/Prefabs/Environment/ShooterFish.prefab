@@ -166,7 +166,7 @@ MonoBehaviour:
   hoverSpeed: 2
   hoverPointTolerance: 0.2
   projectileSpeed: 15
-  playerDetectionRange: 8
+  playerDetectionRange: 5
   rotationSpeed: 720
   shotCooldown: 1.5
   projectileObject: {fileID: 8303463465702044701, guid: 530642e561a2e154d8dc677da182379a, type: 3}
@@ -185,4 +185,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50b6467e33c73924f8db1a39efc5418a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 20
+  damageAmount: 10
