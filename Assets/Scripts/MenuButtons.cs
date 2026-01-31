@@ -9,6 +9,19 @@ public class NewGame : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene(1);
+
+        SceneManager.LoadScene(3, LoadSceneMode.Additive);
+
+    }
+
+    public void OpenCredits()
+    {
+        SceneManager.LoadScene("Credits");
+    }
+
+    public void GoBack()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 
     // Update is called once per frame
