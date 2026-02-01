@@ -91,53 +91,6 @@ public class SlideTentacle : MonoBehaviour, IDamageable
         Destroy(gameObject);
     }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        //if (other.CompareTag("Player") && hasAttacked)
-        //{
-        //    // Apply damage to player
-        //    PlayerController playerController = other.GetComponent<PlayerController>();
-        //    if (playerController != null)
-        //    {
-        //        float damageAmount = isVulnerable ? 15f : 25f; // More damage from armored tentacles
-        //        playerController.currentOxygen = Mathf.Max(0f, playerController.currentOxygen - damageAmount);
-        //        Debug.Log($"Player hit by {(isVulnerable ? "vulnerable" : "armored")} tentacle for {damageAmount} damage!");
-        //    }
-        //}
-    }
-
-    //void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    // Handle collision with environment/walls
-    //    if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") || 
-    //        collision.gameObject.CompareTag("Wall"))
-    //    {
-    //        // Stop movement if hitting a wall during shoot out
-    //        StopAllCoroutines();
-    //        StartCoroutine(RetractEarly());
-    //    }
-    //}
-
-    //IEnumerator RetractEarly()
-    //{
-    //    // If tentacle hits a wall, retract immediately
-    //    Vector2 retractPosition = (Vector2)originalPosition - slideDirection * retractDistance;
-    //    float retractTime = 0f;
-    //    float totalRetractDistance = Vector2.Distance(transform.position, retractPosition);
-    //    float totalRetractTime = totalRetractDistance / retractSpeed;
-
-    //    while (retractTime < totalRetractTime)
-    //    {
-    //        float progress = retractTime / totalRetractTime;
-    //        transform.position = Vector2.Lerp(transform.position, retractPosition, progress);
-    //        retractTime += Time.deltaTime;
-    //        yield return null;
-    //    }
-
-    //    transform.position = retractPosition;
-    //    yield return new WaitForSeconds(0.5f);
-    //    Destroy(gameObject);
-    //}
 
     // Public method to take damage (for vulnerable tentacles)
     public void TakeDamage(float? damage = 0f)

@@ -12,7 +12,9 @@ public class AudioManager : MonoBehaviour
 
     [Header("Default Audio")]
     [SerializeField] private AudioClip defaultBackgroundMusic;
+    [SerializeField] private AudioClip bossBackgroundMusic;
     [SerializeField] private AudioClip defaultBackgroundA;
+
 
     private void Awake()
     {
@@ -48,6 +50,18 @@ public class AudioManager : MonoBehaviour
         musicSource.clip = clip;
         musicSource.loop = loop;
         musicSource.Play();
+    }
+
+    public void PlayBossMusic()
+    {
+        if (bossBackgroundMusic != null)
+        {
+            PlayMusic(bossBackgroundMusic);
+        }
+        else
+        {
+            Debug.LogWarning("Boss background music is not assigned in AudioManager!");
+        }
     }
 
     public void StopMusic()
