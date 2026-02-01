@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Urchin
+  - BossEntry
   layers:
   - Default
   - TransparentFX
@@ -14,7 +15,7 @@ TagManager:
   - UI
   - Backdrop
   - Urchin
-  - 
+  - Player
   - 
   - 
   - 
@@ -41,6 +42,9 @@ TagManager:
   m_SortingLayers:
   - name: Backdrop
     uniqueID: 1872180135
+    locked: 0
+  - name: Background
+    uniqueID: 2048531253
     locked: 0
   - name: Default
     uniqueID: 0
