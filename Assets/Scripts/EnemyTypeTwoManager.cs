@@ -144,13 +144,13 @@ public class EnemyTypeTwoManager : MonoBehaviour
         }
         if (isOnCooldown)
         {
-            if (animator)
-            {
-                animator.SetBool("IsShooting", false);
-            }
             cooldownTimer += Time.fixedDeltaTime;
             if (cooldownTimer >= shotCooldown)
             {
+                if (animator)
+                {
+                    animator.SetBool("IsShooting", false);
+                }
                 if (!CheckForPlayer()) //if player no longer in range, go back to hovering
                 {
                     isHovering = true;
