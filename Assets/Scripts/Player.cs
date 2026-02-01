@@ -356,17 +356,15 @@ public class PlayerController : MonoBehaviour
     {
         IsBoostPressed = context.ReadValueAsButton();
 
-        if(currentMask.maskID == 0)
+        if (IsBoostPressed)
         {
-            if(IsBoostPressed)
-            {
-                AudioManager.Instance.PlaySFX(AudioDatabase.Instance.SpeedBoostClip);
-            }
-            else
-            {
-                AudioManager.Instance.PlaySFX(AudioDatabase.Instance.SpeedBurstStopClip);
-            }
+            AudioManager.Instance.PlaySFX(AudioDatabase.Instance.SpeedBoostClip);
         }
+        else
+        {
+            AudioManager.Instance.PlaySFX(AudioDatabase.Instance.SpeedBurstStopClip);
+        }
+
     }
 
     // Number key inputs for mask selection

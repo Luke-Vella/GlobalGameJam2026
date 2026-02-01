@@ -11,7 +11,6 @@ public class NewGame : MonoBehaviour
         SceneManager.LoadScene(1);
 
         SceneManager.LoadScene(3, LoadSceneMode.Additive);
-
     }
 
     public void OpenCredits()

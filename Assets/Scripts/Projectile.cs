@@ -37,7 +37,10 @@ public class Projectile : MonoBehaviour
             return;
         }
 
+        if(!collision.gameObject.CompareTag("Urchin"))
+        {
             Destroy(gameObject);
+        }
         
     }
 
@@ -57,7 +60,9 @@ public class Projectile : MonoBehaviour
             return;
         }
 
-        Destroy(gameObject);
-
+        if (!collision.gameObject.CompareTag("Urchin"))
+        {
+            Destroy(gameObject);
+        }
     }
 }
