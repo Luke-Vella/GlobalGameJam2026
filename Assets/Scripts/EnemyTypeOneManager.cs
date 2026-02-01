@@ -1,12 +1,14 @@
+using Assets.Scripts;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyTypeOneManager : MonoBehaviour
+public class EnemyTypeOneManager : MonoBehaviour, IDamageable
 {
     private bool isHovering = true;
     private bool isWindingUp = false;
     private bool isCollided = false;
+    private bool isDying = false;
     private float windUpTimer = 0f;
     private float coolDownTimer = 0f;
     private Vector2 engageDirection = new Vector2();
@@ -34,14 +36,22 @@ public class EnemyTypeOneManager : MonoBehaviour
     private Rigidbody2D rb;
     private Transform player;
     private Vector2 currentTarget;
-    private Animator animator;
+    [SerializeField] private Animator animator;
+    [SerializeField] private EndOfAnimation endOfAnimation;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         originalLocalPosition = transform.localPosition;
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        animator = GetComponent<Animator>();
+        
+        if(animator == null)    
+            animator = GetComponentInChildren<Animator>();
+
+        if (endOfAnimation == null)
+            endOfAnimation = GetComponentInChildren<EndOfAnimation>();
+
+        endOfAnimation.AnimationEnded.AddListener(Kill);
     }
 
     void Start()
@@ -51,6 +61,13 @@ public class EnemyTypeOneManager : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(isDying)
+        {
+            Debug.Log("Fish dying");
+            rb.velocity = Vector2.zero;
+            return;
+        }
+
         if (isHovering)
         {
             Debug.Log("Entered hover stage");
@@ -73,6 +90,7 @@ public class EnemyTypeOneManager : MonoBehaviour
         {
             EngageBehaviour();
         }
+
     }
 
     // =========================
@@ -152,6 +170,12 @@ public class EnemyTypeOneManager : MonoBehaviour
         originalLocalPosition = transform.localPosition;
     }
 
+    public void Kill()
+    {
+        isDying = true;
+        Destroy(gameObject, 2f);
+    }
+
     void ApplyShake()
     {
         shakeTime += Time.fixedDeltaTime;
@@ -162,9 +186,19 @@ public class EnemyTypeOneManager : MonoBehaviour
         transform.localPosition = originalLocalPosition + new Vector3(x, y, 0f);
     }
 
-    void AttackPlayer()
+    public void TakeDamage(float? damage = 0f)
     {
         if(animator)
+        {
+            animator.SetTrigger("IsDying");
+        }
+            
+        Kill();
+    }
+
+    void AttackPlayer()
+    {
+        if(animator && !isDying)
         {
             animator.SetBool("IsCharging", true);
         }

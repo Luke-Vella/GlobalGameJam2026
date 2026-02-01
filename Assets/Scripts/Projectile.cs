@@ -1,4 +1,5 @@
 
+using Assets.Scripts;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -22,7 +23,21 @@ public class Projectile : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            return;
+        }
+            
+        // Check if the object can take damage
+        IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
+        if (damageable != null)
+        {
+            damageable.TakeDamage(); // You can add a damage parameter
+            Destroy(gameObject);
+            return;
+        }
 
-        Destroy(gameObject);
+            Destroy(gameObject);
+        
     }
 }

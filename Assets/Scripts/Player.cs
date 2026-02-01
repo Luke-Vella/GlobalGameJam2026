@@ -31,6 +31,12 @@ public class PlayerController : MonoBehaviour
     [Header("Sprite Settings")]
     public SpriteRenderer spriteRenderer;
 
+    [Header("Invulnerability Settings")]
+    public float invulnerabilityDuration = 3f;
+    public float flashInterval = 0.1f;
+    private bool isInvulnerable = false;
+    private Coroutine invulnerabilityCoroutine;
+
     [Header("Mask System")]
     public Mask[] availableMasks; // Assign masks in order: [0] = Default, [1] = Lumen, [2] = Sonar
     private int currentMaskIndex = 0;
@@ -55,6 +61,7 @@ public class PlayerController : MonoBehaviour
     public IdleSwimState IdleSwimState { get; private set; }
     public SwimState SwimState { get; private set; }
     public float CurrentOxygen { get => currentOxygen; private set => currentOxygen = value; }
+    public bool IsInvulnerable { get => isInvulnerable; }
 
     private Camera mainCamera;
     private float currentRotationVelocity = 0f;
@@ -117,6 +124,11 @@ public class PlayerController : MonoBehaviour
             {
                 currentAmmo = 3f;
                 requiresCooldown = false;
+
+                cooldownTimerSlider.gameObject.SetActive(false);
+                cooldownTimerLabel.enabled = false;
+
+                AudioManager.Instance.PlaySFX(AudioDatabase.Instance.ReloadedClip);
             }
         }
 
@@ -160,10 +172,56 @@ public class PlayerController : MonoBehaviour
         CurrentOxygen = Mathf.Min(CurrentOxygen, 100f);
     }
 
-    public void Damage(float oxygenLoss)
+    public void Damage(float oxygenLoss, bool silent = false)
     {
+        // Don't take damage if invulnerable
+        if (isInvulnerable)
+        {
+            return;
+        }
+
         CurrentOxygen -= oxygenLoss;
         CurrentOxygen = Mathf.Max(CurrentOxygen, 0f);
+
+
+
+        if(!silent)
+        {
+            // Start invulnerability
+            if (invulnerabilityCoroutine != null)
+            {
+                StopCoroutine(invulnerabilityCoroutine);
+            }
+
+            invulnerabilityCoroutine = StartCoroutine(InvulnerabilityRoutine());
+        }
+    }
+
+    private IEnumerator InvulnerabilityRoutine()
+    {
+        isInvulnerable = true;
+        float elapsed = 0f;
+
+        while (elapsed < invulnerabilityDuration)
+        {
+            // Toggle sprite visibility for flashing effect
+            if (spriteRenderer != null)
+            {
+                spriteRenderer.enabled = !spriteRenderer.enabled;
+            }
+
+            yield return new WaitForSeconds(flashInterval);
+            elapsed += flashInterval;
+        }
+
+        // Ensure sprite is visible when invulnerability ends
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.enabled = true;
+        }
+
+        isInvulnerable = false;
+        invulnerabilityCoroutine = null;
     }
 
     private void HandleRotation()
@@ -286,6 +344,8 @@ public class PlayerController : MonoBehaviour
                 {
                     cooldownTimerLabel.enabled = true;
                 }
+
+                AudioManager.Instance.PlaySFX(AudioDatabase.Instance.ReloadingClip);
             }
         }
     }
@@ -294,13 +354,16 @@ public class PlayerController : MonoBehaviour
     {
         IsBoostPressed = context.ReadValueAsButton();
 
-        if(IsBoostPressed)
+        if(currentMask.maskID == 0)
         {
-            AudioManager.Instance.PlaySFX(AudioDatabase.Instance.SpeedBoostClip);
-        }
-        else
-        {
-            AudioManager.Instance.PlaySFX(AudioDatabase.Instance.SpeedBurstStopClip);
+            if(IsBoostPressed)
+            {
+                AudioManager.Instance.PlaySFX(AudioDatabase.Instance.SpeedBoostClip);
+            }
+            else
+            {
+                AudioManager.Instance.PlaySFX(AudioDatabase.Instance.SpeedBurstStopClip);
+            }
         }
     }
 

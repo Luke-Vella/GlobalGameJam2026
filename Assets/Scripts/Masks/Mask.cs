@@ -9,7 +9,7 @@ public abstract class Mask : MonoBehaviour
 
     [Header("Movement Modifiers")]
     public float speedMultiplier = 1f;
-    public float oxygenConsumptionRate = 1f;
+    public float oxygenConsumptionRate = 0.5f;
 
     protected PlayerController player;
 
@@ -20,7 +20,7 @@ public abstract class Mask : MonoBehaviour
 
     private void Update()
     {
-        player.Damage(oxygenConsumptionRate * Time.deltaTime);
+        player.Damage(oxygenConsumptionRate * Time.deltaTime, true);
 
         Debug.Log($"Mask: {maskName}, Current Oxygen level : {player.CurrentOxygen}");  
     }

@@ -26,5 +26,16 @@ public class SeaUrchin : MonoBehaviour
             animator.SetBool("IsAwake", false);
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
+            playerController.Damage(5f);
+            Debug.Log($"Player oxygen: {playerController.CurrentOxygen}/{100f}");
+            AudioManager.Instance.PlaySFX(AudioDatabase.Instance.DamageHitClip);
+        }
+    }
 }
 
