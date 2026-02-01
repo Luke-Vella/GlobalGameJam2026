@@ -58,6 +58,13 @@ public class EnemyTypeTwoManager : MonoBehaviour
         {            
             ShootPlayer();
         }
+        else
+        {
+            if (animator)
+            {
+                animator.SetBool("IsShooting", true);
+            }
+        }
     }
 
     // =========================
@@ -138,23 +145,19 @@ public class EnemyTypeTwoManager : MonoBehaviour
 
     void ShootPlayer()
     {
-        if (animator)
-        {
-            animator.SetBool("IsShooting", true);
-        }
         if (isOnCooldown)
         {
             cooldownTimer += Time.fixedDeltaTime;
             if (cooldownTimer >= shotCooldown)
             {
-                if (animator)
-                {
-                    animator.SetBool("IsShooting", false);
-                }
                 if (!CheckForPlayer()) //if player no longer in range, go back to hovering
                 {
                     isHovering = true;
                     PickNewHoverTarget();
+                    if (animator)
+                    {
+                        animator.SetBool("IsShooting", false);
+                    }
                 }
                 cooldownTimer = 0; // reset cooldown
                 isOnCooldown = false;
@@ -187,7 +190,6 @@ public class EnemyTypeTwoManager : MonoBehaviour
                 rotationSpeed * Time.fixedDeltaTime
             );
             isRotating = true;
-
             yield return new WaitForFixedUpdate();
         }
 

@@ -1,8 +1,9 @@
+using Assets.Scripts;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlideTentacle : MonoBehaviour
+public class SlideTentacle : MonoBehaviour, IDamageable
 {
     [Header("Slide Settings")]
     public float shootOutSpeed = 15f;
@@ -13,14 +14,17 @@ public class SlideTentacle : MonoBehaviour
     public float shootOutDistance = 8f;
     public float retractDistance = 2f;
 
-    [Header("Direction Detection")]
-    public bool isVulnerable = false; // Set this based on prefab type
-
     public int remainingHealthPoints;
     public Vector2 slideDirection;
+    public int tentacleNumber;
+    public KrakenManager krakenManager;
 
     private Vector3 originalPosition;
     private bool hasAttacked = false;
+
+    [SerializeField] 
+    private Sprite vulnerableVersion;
+    private SpriteRenderer spriteRenderer;
 
     // Start is called before the first frame update
     void Start()
@@ -81,6 +85,8 @@ public class SlideTentacle : MonoBehaviour
         }
 
         transform.position = retractPosition;
+
+        Destroy(gameObject);
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -98,53 +104,56 @@ public class SlideTentacle : MonoBehaviour
         //}
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        // Handle collision with environment/walls
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") || 
-            collision.gameObject.CompareTag("Wall"))
-        {
-            // Stop movement if hitting a wall during shoot out
-            StopAllCoroutines();
-            StartCoroutine(RetractEarly());
-        }
-    }
+    //void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    // Handle collision with environment/walls
+    //    if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") || 
+    //        collision.gameObject.CompareTag("Wall"))
+    //    {
+    //        // Stop movement if hitting a wall during shoot out
+    //        StopAllCoroutines();
+    //        StartCoroutine(RetractEarly());
+    //    }
+    //}
 
-    IEnumerator RetractEarly()
-    {
-        // If tentacle hits a wall, retract immediately
-        Vector2 retractPosition = (Vector2)originalPosition - slideDirection * retractDistance;
-        float retractTime = 0f;
-        float totalRetractDistance = Vector2.Distance(transform.position, retractPosition);
-        float totalRetractTime = totalRetractDistance / retractSpeed;
+    //IEnumerator RetractEarly()
+    //{
+    //    // If tentacle hits a wall, retract immediately
+    //    Vector2 retractPosition = (Vector2)originalPosition - slideDirection * retractDistance;
+    //    float retractTime = 0f;
+    //    float totalRetractDistance = Vector2.Distance(transform.position, retractPosition);
+    //    float totalRetractTime = totalRetractDistance / retractSpeed;
 
-        while (retractTime < totalRetractTime)
-        {
-            float progress = retractTime / totalRetractTime;
-            transform.position = Vector2.Lerp(transform.position, retractPosition, progress);
-            retractTime += Time.deltaTime;
-            yield return null;
-        }
+    //    while (retractTime < totalRetractTime)
+    //    {
+    //        float progress = retractTime / totalRetractTime;
+    //        transform.position = Vector2.Lerp(transform.position, retractPosition, progress);
+    //        retractTime += Time.deltaTime;
+    //        yield return null;
+    //    }
 
-        transform.position = retractPosition;
-        yield return new WaitForSeconds(0.5f);
-        Destroy(gameObject);
-    }
+    //    transform.position = retractPosition;
+    //    yield return new WaitForSeconds(0.5f);
+    //    Destroy(gameObject);
+    //}
 
     // Public method to take damage (for vulnerable tentacles)
-    public void TakeDamage(float damage)
+    public void TakeDamage(float? damage = 0f)
     {
-        if (isVulnerable)
+        Debug.Log($"Remaining health: {remainingHealthPoints}");
+        remainingHealthPoints--;
+        krakenManager.tentacleList[tentacleNumber].healthPoints = krakenManager.tentacleList[tentacleNumber].healthPoints - 1;
+        if (remainingHealthPoints <= 0)
         {
-            Debug.Log($"Vulnerable tentacle took {damage} damage!");
-            // Add health system here if needed
-            // For now, just destroy immediately when hit
-            StopAllCoroutines();
             Destroy(gameObject);
+        }
+        else if (remainingHealthPoints <= 3)
+        {
+            spriteRenderer.sprite = vulnerableVersion;
         }
         else
         {
-            Debug.Log("Armored tentacle is immune to damage!");
+            Debug.Log($"Remaining health: {remainingHealthPoints}");
         }
     }
 }
