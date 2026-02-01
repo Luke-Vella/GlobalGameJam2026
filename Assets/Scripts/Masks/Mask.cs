@@ -20,9 +20,9 @@ public abstract class Mask : MonoBehaviour
 
     private void Update()
     {
-        player.currentOxygen -= oxygenConsumptionRate * Time.deltaTime;
+        player.Damage(oxygenConsumptionRate * Time.deltaTime);
 
-        Debug.Log($"Mask: {maskName}, Current Oxygen level : {player.currentOxygen}");  
+        Debug.Log($"Mask: {maskName}, Current Oxygen level : {player.CurrentOxygen}");  
     }
 
     public virtual void OnEquip()

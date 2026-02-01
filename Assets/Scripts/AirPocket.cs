@@ -27,7 +27,7 @@ public class AirPocket : MonoBehaviour
             float oxygenToGive = oxygenPerSecond * Time.deltaTime;
             oxygenToGive = Mathf.Min(oxygenToGive, remainingCapacity);
             
-            _player.currentOxygen = Mathf.Min(_player.currentOxygen + oxygenToGive, 100f);
+            _player.ReplenishOxygen(oxygenToGive);
             remainingCapacity -= oxygenToGive;
         }
     }

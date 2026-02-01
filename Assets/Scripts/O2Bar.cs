@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 
 public class BarraTempo : MonoBehaviour
@@ -41,11 +41,11 @@ public class BarraTempo : MonoBehaviour
             //O2Bar.fillAmount = _playerController.currentOxygen;
 
             //empties the slider
-            oxygenSlider.value = _playerController.currentOxygen/100;
+            oxygenSlider.value = _playerController.CurrentOxygen/100;
 
             // Sposta il rettangolo verso il basso. 
-            // Quando fill è 1 (piena), lo spostamento è 0.
-            // Quando fill è 0.5 (metà), scende di metà altezza.
+            // Quando fill ï¿½ 1 (piena), lo spostamento ï¿½ 0.
+            // Quando fill ï¿½ 0.5 (metï¿½), scende di metï¿½ altezza.
             //float offset = (1 - (_playerController.currentOxygen / 100)) * altezzaBarra;
             //O2Bar.rectTransform.anchoredPosition = new Vector2(posizioneIniziale.x, posizioneIniziale.y - offset);
         }

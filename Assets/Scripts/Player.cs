@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -24,7 +26,7 @@ public class PlayerController : MonoBehaviour
     public float maxRotationSpeed = 180f;
     public float rotationDrag = 3f;
     public float movingRotationMultiplier = 0.3f;
-    public float currentOxygen = 100f;
+    private float currentOxygen = 100f;
 
     [Header("Sprite Settings")]
     public SpriteRenderer spriteRenderer;
@@ -34,6 +36,17 @@ public class PlayerController : MonoBehaviour
     private int currentMaskIndex = 0;
     private Mask currentMask;
 
+    [Header("Projectile Settings")]
+    public Projectile projectilePrefab;
+    public Transform firePoint;
+    public float fireCooldown = 3f; // 3 second cooldown between shots
+    public float recoilForce = 2f; // Force applied in opposite direction when firing
+    private float fireCooldownTimer = 0f;
+    private float currentAmmo = 3f;
+    private bool requiresCooldown = false;
+    public Slider cooldownTimerSlider;
+    public TMP_Text cooldownTimerLabel;
+
     public Rigidbody2D Rb { get; private set; }
     public Vector2 MoveInput { get; set; }
     public bool IsBoostPressed { get; private set; }
@@ -41,6 +54,7 @@ public class PlayerController : MonoBehaviour
     public PlayerStateMachine StateMachine { get; private set; }
     public IdleSwimState IdleSwimState { get; private set; }
     public SwimState SwimState { get; private set; }
+    public float CurrentOxygen { get => currentOxygen; private set => currentOxygen = value; }
 
     private Camera mainCamera;
     private float currentRotationVelocity = 0f;
@@ -77,12 +91,34 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if(currentOxygen <= 0f)
+        if(CurrentOxygen <= 0f)
         {
             GameStateManager.Instance.Restart();
             AudioManager.Instance.PlaySFX(AudioDatabase.Instance.GameOverClip);
         }
 
+        if(requiresCooldown)
+        {
+            if (cooldownTimerSlider != null)
+            {
+                cooldownTimerSlider.value = fireCooldownTimer / fireCooldown;
+            }
+
+            if(cooldownTimerLabel != null)
+            {
+                cooldownTimerLabel.text = "Reloading... " + Mathf.CeilToInt(fireCooldownTimer).ToString();
+            }
+
+            if (fireCooldownTimer > 0f)
+            {
+                fireCooldownTimer -= Time.deltaTime;
+            }
+            else
+            {
+                currentAmmo = 3f;
+                requiresCooldown = false;
+            }
+        }
 
         StateMachine.Update();
 
@@ -118,6 +154,17 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Handled");
     }
 
+    public void ReplenishOxygen(float oxygenGain)
+    {
+        CurrentOxygen += oxygenGain;
+        CurrentOxygen = Mathf.Min(CurrentOxygen, 100f);
+    }
+
+    public void Damage(float oxygenLoss)
+    {
+        CurrentOxygen -= oxygenLoss;
+        CurrentOxygen = Mathf.Max(CurrentOxygen, 0f);
+    }
 
     private void HandleRotation()
     {
@@ -137,9 +184,6 @@ public class PlayerController : MonoBehaviour
 
         // Calculate angle in degrees
         float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        
-        // Subtract 90 because sprite faces up by default
-        targetAngle -= 90f;
 
         // Directly set rotation without any smoothing or velocity
         transform.rotation = Quaternion.Euler(0f, 0f, targetAngle);
@@ -207,6 +251,43 @@ public class PlayerController : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         MoveInput = context.ReadValue<Vector2>();
+    }
+
+    public void OnFire(InputAction.CallbackContext context)
+    {
+        if (context.performed && fireCooldownTimer <= 0f)
+        {
+            Projectile proj = Instantiate(
+                projectilePrefab,
+                firePoint.position,
+                Quaternion.identity
+            );
+
+            Vector2 direction = firePoint.right; // or up depending on sprite
+            proj.Fire(direction);
+
+            // Apply recoil force in opposite direction
+            Rb.AddForce(-direction * recoilForce, ForceMode2D.Impulse);
+
+            currentAmmo--;
+
+            if (currentAmmo == 0)
+            {
+                requiresCooldown = true;
+                fireCooldownTimer = fireCooldown;
+
+                if (cooldownTimerSlider != null)
+                {
+                    cooldownTimerSlider.value = 1f;
+                    cooldownTimerSlider.gameObject.SetActive(true);
+                }
+
+                if(cooldownTimerLabel != null)
+                {
+                    cooldownTimerLabel.enabled = true;
+                }
+            }
+        }
     }
 
     public void OnBoost(InputAction.CallbackContext context)

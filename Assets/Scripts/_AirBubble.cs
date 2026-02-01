@@ -55,7 +55,7 @@ public class AirBubble : MonoBehaviour
         
         while (elapsed < boostDuration)
         {
-            player.currentOxygen = Mathf.Min(player.currentOxygen + boostPerSecond * Time.deltaTime, 100f);
+            player.ReplenishOxygen(boostPerSecond * Time.deltaTime);
             elapsed += Time.deltaTime;
             
             // Gradually reduce opacity as oxygen is given
