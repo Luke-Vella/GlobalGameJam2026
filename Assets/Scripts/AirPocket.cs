@@ -5,80 +5,98 @@ using UnityEngine;
 public class AirPocket : MonoBehaviour
 {
     public float boostAmount = 100f; // Total oxygen to give
-    public float boostDuration = 5f; // Duration over which to give the oxygen
+    public float oxygenPerSecond = 20f; // Oxygen given per second while player is inside
+    public float decayDuration = 4.5f; // Duration over which the air pocket decays
     [SerializeField] private SpriteRenderer spriteRenderer;
+    private PlayerController _player;
 
     public bool isGivingOxygen = false;
-    public bool canGiveOxygen = true;
-    public float timerForNextActivation = 10f; // Time before the bubble can be used again
-    private float activationTimer = 0f;
+    private float remainingCapacity = 100f; // Current oxygen capacity
+    private Coroutine decayCoroutine;
 
     private void Start()
     {
+        remainingCapacity = boostAmount;
     }
 
     private void Update()
     {
-        if(!canGiveOxygen)
+        // Give oxygen while player is inside and capacity remains
+        if (isGivingOxygen && _player != null && remainingCapacity > 0f)
         {
-            activationTimer -= Time.deltaTime;
-            if(activationTimer <= 0f)
-            {
-                canGiveOxygen = true;
-            }
+            float oxygenToGive = oxygenPerSecond * Time.deltaTime;
+            oxygenToGive = Mathf.Min(oxygenToGive, remainingCapacity);
+            
+            _player.currentOxygen = Mathf.Min(_player.currentOxygen + oxygenToGive, 100f);
+            remainingCapacity -= oxygenToGive;
         }
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && canGiveOxygen && !isGivingOxygen)
+        if (collision.gameObject.CompareTag("Player"))
         {
             PlayerController player = collision.gameObject.GetComponent<PlayerController>();
-
-            GiveGradualOxygen(player);
+            
+            if (player && remainingCapacity > 0f)
+            {
+                _player = player;
+                isGivingOxygen = true;
+                
+                // Start decay if not already decaying
+                if (decayCoroutine == null)
+                {
+                    decayCoroutine = StartCoroutine(DecayAirPocket());
+                    AudioManager.Instance.PlayBackgroundB(AudioDatabase.Instance.AirPocketClip);
+                }
+            }
         }
     }
 
-    public void GiveGradualOxygen(PlayerController player)
+    public void OnTriggerExit2D(Collider2D collision)
     {
-        player.StartCoroutine(GradualOxygenBoost(player));
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            if(isGivingOxygen)
+            {
+                isGivingOxygen = false;
+                _player = null;
+            }
+
+            AudioManager.Instance.StopBackgroundB();
+            // Decay continues even after player exits
+        }
     }
 
-    public IEnumerator GradualOxygenBoost(PlayerController player)
+    private IEnumerator DecayAirPocket()
     {
-        isGivingOxygen = true;
-        float boostPerSecond = boostAmount / boostDuration;
         float elapsed = 0f;
+        float startCapacity = remainingCapacity;
         
         Color color = spriteRenderer.color;
         float startAlpha = color.a;
-        
-        while (elapsed < boostDuration)
+
+        while (elapsed < decayDuration)
         {
-            player.currentOxygen = Mathf.Min(player.currentOxygen + boostPerSecond * Time.deltaTime, 100f);
             elapsed += Time.deltaTime;
+            float progress = elapsed / decayDuration;
             
-            // Gradually reduce opacity as oxygen is given
-            float progress = elapsed / boostDuration;
+            // Decay capacity over time
+            remainingCapacity = Mathf.Lerp(startCapacity, 0f, progress);
+            
+            // Gradually reduce opacity as air pocket decays
             color.a = Mathf.Lerp(startAlpha, 0.1f, progress);
             spriteRenderer.color = color;
             
             yield return null;
         }
 
-        Deactivate();
-    }
-
-    public void Deactivate()
-    {
-        canGiveOxygen = false;
-        isGivingOxygen = false;
-
-        // Ensure opacity is at cooldown level
-        Color color = spriteRenderer.color;
+        // Ensure fully depleted
+        remainingCapacity = 0f;
         color.a = 0.1f;
         spriteRenderer.color = color;
-
-        activationTimer = timerForNextActivation;
+        
+        isGivingOxygen = false;
+        decayCoroutine = null;
     }
 }

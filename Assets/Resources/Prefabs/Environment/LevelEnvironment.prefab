@@ -529,7 +529,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 978727343607272358}
+  - {fileID: 1675594517439603179}
   - {fileID: 8419708253609670976}
+  - {fileID: 6888378021900060361}
   - {fileID: 5840832289726015563}
   - {fileID: 3088131026304016966}
   - {fileID: 5196831203816284128}
@@ -2860,6 +2862,76 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1566283790156607824, guid: 4faca54ebae27f149a3d5094e3eb7e0a, type: 3}
   m_PrefabInstance: {fileID: 3237594519035319004}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3320604434080300918
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4783621305923634570}
+    m_Modifications:
+    - target: {fileID: 4131419847485890205, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -9.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131419847485890205, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 34.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131419847485890205, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.08497865
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131419847485890205, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.026432915
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131419847485890205, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131419847485890205, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131419847485890205, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.9996506
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131419847485890205, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131419847485890205, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131419847485890205, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 176.971
+      objectReference: {fileID: 0}
+    - target: {fileID: 5177112997216402781, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+      propertyPath: m_Name
+      value: SunLight (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393866848026283905, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+      propertyPath: m_Intensity
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393866848026283905, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+      propertyPath: m_PointLightInnerAngle
+      value: 41.65911
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+--- !u!4 &1675594517439603179 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4131419847485890205, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+  m_PrefabInstance: {fileID: 3320604434080300918}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3324223465198937392
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3294,11 +3366,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4131419847485890205, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15.550001
+      value: -16.71
       objectReference: {fileID: 0}
     - target: {fileID: 4131419847485890205, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 32.45
+      value: 32.57
       objectReference: {fileID: 0}
     - target: {fileID: 4131419847485890205, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4376,11 +4448,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4131419847485890205, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.72
+      value: 2.06
       objectReference: {fileID: 0}
     - target: {fileID: 4131419847485890205, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 34.94
+      value: 40.03
       objectReference: {fileID: 0}
     - target: {fileID: 4131419847485890205, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4417,6 +4489,10 @@ PrefabInstance:
     - target: {fileID: 5177112997216402781, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
       propertyPath: m_Name
       value: SunLight (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393866848026283905, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+      propertyPath: m_PointLightInnerRadius
+      value: 10.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5654,6 +5730,76 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 375223119938200363, guid: 59474cc1b0a1c3f4796277e9c2378fb3, type: 3}
   m_PrefabInstance: {fileID: 7348889496133985960}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7407769543505025108
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4783621305923634570}
+    m_Modifications:
+    - target: {fileID: 4131419847485890205, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131419847485890205, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 33.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131419847485890205, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.08497865
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131419847485890205, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.026432915
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131419847485890205, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131419847485890205, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131419847485890205, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.9996506
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131419847485890205, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131419847485890205, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131419847485890205, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 176.971
+      objectReference: {fileID: 0}
+    - target: {fileID: 5177112997216402781, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+      propertyPath: m_Name
+      value: SunLight (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393866848026283905, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+      propertyPath: m_PointLightInnerAngle
+      value: 8.725138
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393866848026283905, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+      propertyPath: m_PointLightOuterAngle
+      value: 96.17904
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+--- !u!4 &6888378021900060361 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4131419847485890205, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+  m_PrefabInstance: {fileID: 7407769543505025108}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7413388228627030856
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5726,11 +5872,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4131419847485890205, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.43
+      value: 14.83
       objectReference: {fileID: 0}
     - target: {fileID: 4131419847485890205, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 32.45
+      value: 31.35
       objectReference: {fileID: 0}
     - target: {fileID: 4131419847485890205, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5767,6 +5913,26 @@ PrefabInstance:
     - target: {fileID: 5177112997216402781, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
       propertyPath: m_Name
       value: SunLight (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393866848026283905, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+      propertyPath: m_FalloffIntensity
+      value: 0.669
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393866848026283905, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+      propertyPath: m_PointLightInnerAngle
+      value: 11.861601
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393866848026283905, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+      propertyPath: m_PointLightOuterAngle
+      value: 71.08643
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393866848026283905, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+      propertyPath: m_PointLightInnerRadius
+      value: 6.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393866848026283905, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+      propertyPath: m_PointLightOuterRadius
+      value: 36.97
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6146,11 +6312,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4131419847485890205, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 23.16
+      value: 21.13
       objectReference: {fileID: 0}
     - target: {fileID: 4131419847485890205, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 32.45
+      value: 34.3
       objectReference: {fileID: 0}
     - target: {fileID: 4131419847485890205, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6187,6 +6353,22 @@ PrefabInstance:
     - target: {fileID: 5177112997216402781, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
       propertyPath: m_Name
       value: SunLight (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393866848026283905, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+      propertyPath: m_PointLightInnerAngle
+      value: 10.2934
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393866848026283905, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+      propertyPath: m_PointLightOuterAngle
+      value: 130.68127
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393866848026283905, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+      propertyPath: m_PointLightInnerRadius
+      value: 7.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393866848026283905, guid: 47ef2648983c1fd47a0649d39920d7bb, type: 3}
+      propertyPath: m_PointLightOuterRadius
+      value: 27.07
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

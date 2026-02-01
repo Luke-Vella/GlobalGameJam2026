@@ -43,6 +43,8 @@ public class LumenMask : Mask
     {
         isLightOn = !isLightOn;
 
+        AudioManager.Instance.PlaySFX(AudioDatabase.Instance.LightOnOffClip);
+
         if (isLightOn)
         {
             TurnOnLight();
