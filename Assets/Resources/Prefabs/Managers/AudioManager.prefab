@@ -67,7 +67,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.7
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -503,7 +503,7 @@ MonoBehaviour:
   sonarOnOffClip: {fileID: 8300000, guid: bafe4cb1dd4dba14e90cb397654aee54, type: 3}
   lightOnOffClip: {fileID: 8300000, guid: b9cdefb0f09862845b97f4cd4419a5ca, type: 3}
   pageTurnClip: {fileID: 0}
-  speedBurstClip: {fileID: 8300000, guid: 43a75c492fd5ee74da8f290f3cf88c16, type: 3}
+  speedBurstClip: {fileID: 8300000, guid: d3f2327732e815848b644e89d8529236, type: 3}
   speedBurstStopClip: {fileID: 8300000, guid: a0f2a1e95e256404ebfc1645256f59d4, type: 3}
   swordFishChargeClip: {fileID: 8300000, guid: dc8bab0e9d46ba44d99183772c8e6364, type: 3}
   pauseMenuClip: {fileID: 8300000, guid: e65bc88646e25d6448d901f667058de7, type: 3}
