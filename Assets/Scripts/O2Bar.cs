@@ -41,7 +41,7 @@ public class BarraTempo : MonoBehaviour
             //O2Bar.fillAmount = _playerController.currentOxygen;
 
             //empties the slider
-            oxygenSlider.value = _playerController.currentOxygen/100;
+            oxygenSlider.value = _playerController.CurrentOxygen/100;
 
             // Sposta il rettangolo verso il basso. 
             // Quando fill è 1 (piena), lo spostamento è 0.
