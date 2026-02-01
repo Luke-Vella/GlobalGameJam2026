@@ -134,13 +134,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: BossEntryLine
       objectReference: {fileID: 0}
+    - target: {fileID: 1238583713485102530, guid: 8118545f2a2730b47a28012282ff1077, type: 3}
+      propertyPath: KrakenBoss
+      value: 
+      objectReference: {fileID: 1957003629}
+    - target: {fileID: 1238583713485102530, guid: 8118545f2a2730b47a28012282ff1077, type: 3}
+      propertyPath: AudioManagerObject
+      value: 
+      objectReference: {fileID: 4848506915211612279}
     - target: {fileID: 6261249048622617659, guid: 8118545f2a2730b47a28012282ff1077, type: 3}
       propertyPath: m_LocalPosition.x
       value: -17.89
       objectReference: {fileID: 0}
     - target: {fileID: 6261249048622617659, guid: 8118545f2a2730b47a28012282ff1077, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -149.25
+      value: -150.12
       objectReference: {fileID: 0}
     - target: {fileID: 6261249048622617659, guid: 8118545f2a2730b47a28012282ff1077, type: 3}
       propertyPath: m_LocalPosition.z
@@ -419,7 +427,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2368509909055479804, guid: 4854908a43245fc4ca3b6144419500d5, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2495068373903890359, guid: 4854908a43245fc4ca3b6144419500d5, type: 3}
       propertyPath: m_LocalScale.x
@@ -482,6 +490,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4854908a43245fc4ca3b6144419500d5, type: 3}
+--- !u!1 &1957003629 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2368509909055479804, guid: 4854908a43245fc4ca3b6144419500d5, type: 3}
+  m_PrefabInstance: {fileID: 1957003628}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1944168982110128166
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -718,6 +731,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 406d4ced7a8421f4cbd7bcc965414dd0, type: 3}
+--- !u!1 &4848506915211612279 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2462300700429133405, guid: 406d4ced7a8421f4cbd7bcc965414dd0, type: 3}
+  m_PrefabInstance: {fileID: 4848506915211612278}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5015874938386335433
 PrefabInstance:
   m_ObjectHideFlags: 0
