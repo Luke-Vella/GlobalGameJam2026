@@ -316,6 +316,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51c95695ca6d8004e93b3c9055012b42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slideAttackSpawnPoints:
+  - {fileID: 7315544834631960179}
+  - {fileID: 5197238433643218616}
+  - {fileID: 5405967791905550030}
+  - {fileID: 8227230056862446448}
+  - {fileID: 2491651917132598627}
+  - {fileID: 1425369054166650260}
+  - {fileID: 3749179565483255114}
+  - {fileID: 882308784342974930}
+  - {fileID: 6827149769448421602}
+  - {fileID: 6323580978218927606}
+  - {fileID: 1388327095114597594}
+  - {fileID: 3187252603175638536}
+  - {fileID: 1156722544082524770}
+  - {fileID: 243491283328368268}
+  - {fileID: 5505314381457333724}
+  - {fileID: 8414786952824345759}
+  slamAttackSpawnPoints: []
+  armouredSlideAttackRightPrefab: {fileID: 6073213131427434856, guid: 2913f535cfe88bb479d97074eedb1f3b, type: 3}
+  armouredSlideAttackTopPrefab: {fileID: 6073213131427434856, guid: 2adda55332225d04db2ddd3031c6cbc6, type: 3}
+  armouredSlideAttackLeftPrefab: {fileID: 6073213131427434856, guid: 629792a9d66b61042a19d54c8b96989e, type: 3}
+  armouredSlideAttackDownPrefab: {fileID: 6073213131427434856, guid: 19797fa8fc0484f4e8987a36070fbf3b, type: 3}
+  vulnerableSlideAttackRightPrefab: {fileID: 5723693362682149375, guid: e0704f791fb5e4c47aac0564352eb45e, type: 3}
+  vulnerableSlideAttackTopPrefab: {fileID: 5723693362682149375, guid: bee510356e32ceb4abf8fed01f213962, type: 3}
+  vulnerableSlideAttackLeftPrefab: {fileID: 5723693362682149375, guid: a011e3ff594ac0441adb060b3230907e, type: 3}
+  vulnerableSlideAttackDownPrefab: {fileID: 5723693362682149375, guid: 2f8899f1c6a762b439b7400625660286, type: 3}
 --- !u!1 &2965636248847850871
 GameObject:
   m_ObjectHideFlags: 0
