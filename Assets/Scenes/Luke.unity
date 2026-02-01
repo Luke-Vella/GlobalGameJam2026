@@ -205,6 +205,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 760100873}
     m_Modifications:
+    - target: {fileID: 6006053211504628571, guid: ab040b3dcd7e60848b8c9ee9d2e8e469, type: 3}
+      propertyPath: m_SortingLayer
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6006053211504628571, guid: ab040b3dcd7e60848b8c9ee9d2e8e469, type: 3}
+      propertyPath: m_SortingOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6006053211504628571, guid: ab040b3dcd7e60848b8c9ee9d2e8e469, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2048531253
+      objectReference: {fileID: 0}
     - target: {fileID: 7376077115612658033, guid: ab040b3dcd7e60848b8c9ee9d2e8e469, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5
@@ -257,7 +269,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: RockSquareAsh (9)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2274941197534772358, guid: ab040b3dcd7e60848b8c9ee9d2e8e469, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -595,6 +608,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 760100873}
     m_Modifications:
+    - target: {fileID: 6006053211504628571, guid: ab040b3dcd7e60848b8c9ee9d2e8e469, type: 3}
+      propertyPath: m_SortingLayer
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6006053211504628571, guid: ab040b3dcd7e60848b8c9ee9d2e8e469, type: 3}
+      propertyPath: m_SortingOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6006053211504628571, guid: ab040b3dcd7e60848b8c9ee9d2e8e469, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 2048531253
+      objectReference: {fileID: 0}
     - target: {fileID: 7376077115612658033, guid: ab040b3dcd7e60848b8c9ee9d2e8e469, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5
@@ -647,7 +672,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: RockSquareAsh (8)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2274941197534772358, guid: ab040b3dcd7e60848b8c9ee9d2e8e469, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -954,15 +980,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2495068373903890359, guid: 4854908a43245fc4ca3b6144419500d5, type: 3}
       propertyPath: m_LocalScale.x
-      value: 35.8
+      value: 41.660004
       objectReference: {fileID: 0}
     - target: {fileID: 2495068373903890359, guid: 4854908a43245fc4ca3b6144419500d5, type: 3}
       propertyPath: m_LocalScale.y
-      value: 19.939531
+      value: 23.203379
       objectReference: {fileID: 0}
     - target: {fileID: 2495068373903890359, guid: 4854908a43245fc4ca3b6144419500d5, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.3418258
+      value: 1.5614656
       objectReference: {fileID: 0}
     - target: {fileID: 2495068373903890359, guid: 4854908a43245fc4ca3b6144419500d5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -970,7 +996,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2495068373903890359, guid: 4854908a43245fc4ca3b6144419500d5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -150.4
+      value: -150.76
       objectReference: {fileID: 0}
     - target: {fileID: 2495068373903890359, guid: 4854908a43245fc4ca3b6144419500d5, type: 3}
       propertyPath: m_LocalPosition.z
