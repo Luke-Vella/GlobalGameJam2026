@@ -13,6 +13,11 @@ public class NewGame : MonoBehaviour
         SceneManager.LoadScene(3, LoadSceneMode.Additive);
     }
 
+    public void StartComic()
+    {
+        SceneManager.LoadScene(4);
+    }
+
     public void OpenCredits()
     {
         SceneManager.LoadScene("Credits");
