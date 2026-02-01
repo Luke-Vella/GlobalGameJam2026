@@ -254,11 +254,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7640901664943975387, guid: 0072101bdf765e0469e6c5411e1faafa, type: 3}
   m_PrefabInstance: {fileID: 7888443227305317355}
   m_PrefabAsset: {fileID: 0}
---- !u!20 &1082778722 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 4870521576475564491, guid: 0072101bdf765e0469e6c5411e1faafa, type: 3}
-  m_PrefabInstance: {fileID: 7888443227305317355}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1082778724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -368,18 +363,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3686087416413293744, guid: 2aa817126b227414caa61eeb5ec7e50c, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3686087416413293744, guid: 2aa817126b227414caa61eeb5ec7e50c, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5182594264518193814, guid: 2aa817126b227414caa61eeb5ec7e50c, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 1082778722}
     - target: {fileID: 7265786484921085596, guid: 2aa817126b227414caa61eeb5ec7e50c, type: 3}
       propertyPath: m_Name
       value: Player
