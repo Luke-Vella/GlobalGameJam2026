@@ -5,10 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
+    [Header("Main Menus")]
     public GameObject PauseMenu;
     public GameObject WarningMenu;
     public GameObject InstructionsMenu;
+
+    public GameObject ControlsScreen;
+    public GameObject InstructionsScreen;
+
+    [Header("Pages")]
+    public GameObject[] instructionPages;
+
+    [Header("Variables")]
+    private int currentPageIndex = 0;
     public bool isPaused = false;
+
+    [Header("Buttons")]
+    public GameObject BackButton;
+    public GameObject NextButton;
+    public GameObject PlayButton;
 
     void Start()
     {
@@ -30,6 +45,38 @@ public class PauseManager : MonoBehaviour
             }
         }
     }
+
+    public void NextPage()
+    {
+        if (currentPageIndex < instructionPages.Length - 1)
+        {
+            currentPageIndex++;
+            ShowCurrentPage();
+        }
+    }
+
+    public void PreviousPage()
+    {
+        if (currentPageIndex > 0)
+        {
+            currentPageIndex--;
+            ShowCurrentPage();
+        }
+    }
+
+    private void ShowCurrentPage()
+    {
+        for (int i = 0; i < instructionPages.Length; i++)
+        {
+            instructionPages[i].SetActive(i == currentPageIndex);
+        }
+
+        BackButton.SetActive(currentPageIndex != 0);
+        NextButton.SetActive(currentPageIndex != 2);
+        PlayButton.SetActive(currentPageIndex == 2);
+
+    }
+
     public void Resume()
     {
         PauseMenu.SetActive(false); // hids UI
@@ -63,21 +110,21 @@ public class PauseManager : MonoBehaviour
         InstructionsMenu.SetActive(true);
         PauseMenu.SetActive(false);
     }
+    public void ContinueInstructions()
+    {
+        InstructionsScreen.SetActive(false);
+        ControlsScreen.SetActive(true);
+    }
 
     public void CloseInstructions()
     {
         InstructionsMenu.SetActive(false);  // hids InstructionsMenu
         Resume();
-
     }
 
     public void MainMenu()
     {
         SceneManager.LoadScene("MainMenu");
     }
-
-
-
-
 
 }
