@@ -40,4 +40,24 @@ public class Projectile : MonoBehaviour
             Destroy(gameObject);
         
     }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            return;
+        }
+
+        // Check if the object can take damage
+        IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
+        if (damageable != null)
+        {
+            damageable.TakeDamage(); // You can add a damage parameter
+            Destroy(gameObject);
+            return;
+        }
+
+        Destroy(gameObject);
+
+    }
 }

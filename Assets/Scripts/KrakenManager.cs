@@ -12,12 +12,12 @@ public class KrakenManager : MonoBehaviour
     public GameObject armouredSlideAttackRightPrefab;
     public GameObject armouredSlideAttackTopPrefab;
     public GameObject armouredSlideAttackLeftPrefab;
-    public GameObject armouredSlideAttackDownPrefab;
+    public GameObject armouredSlideAttackBottomPrefab;
 
     public GameObject vulnerableSlideAttackRightPrefab;
     public GameObject vulnerableSlideAttackTopPrefab;
     public GameObject vulnerableSlideAttackLeftPrefab;
-    public GameObject vulnerableSlideAttackDownPrefab;
+    public GameObject vulnerableSlideAttackBottomPrefab;
 
     [Header("Kraken Settings")]
     public int tentacleHealthPoints = 3;
@@ -27,15 +27,17 @@ public class KrakenManager : MonoBehaviour
     public float bufferBetweenTentacles = 1f;
     public float bufferPerTentacleBetweenActions = 1f;
 
-    public int[] tentacleHealth;
+    [SerializeField]
+    public Tentacle[] tentacleList;
 
     // Start is called before the first frame update
     void Start()
     {
-        tentacleHealth = new int[vulnerableTentacleCount + armouredTentacleCount];
-        for (int i = 0; i < tentacleHealth.Length; i++)
+        tentacleList = new Tentacle[vulnerableTentacleCount + armouredTentacleCount];
+        for (int i = 0; i < tentacleList.Length; i++)
         {
-            tentacleHealth[i] = tentacleHealthPoints;
+            bool isVulnerable = i < vulnerableTentacleCount;
+            tentacleList[i] = new Tentacle(i, tentacleHealthPoints, isVulnerable);
         }
         player = GameObject.FindGameObjectWithTag("Player").transform;
         NextAction("");
@@ -84,12 +86,12 @@ public class KrakenManager : MonoBehaviour
     {
         bool firstTentacle = true;
         List<int> usedSpawnPoints = new List<int>();
-        int remainingTentacleCount = 0;
-        for (int c = 0; c < tentacleHealth.Length; c++)
+        //int remainingTentacleCount = 0;
+        for (int c = 0; c < tentacleList.Length; c++)
         {
-            if (tentacleHealth[c] > 0)
+            if (tentacleList[c].healthPoints > 0)
             {
-                remainingTentacleCount++;
+                //remainingTentacleCount++;
                 int closestSpawnPoint = 0;
                 if (firstTentacle)
                 {
@@ -135,101 +137,74 @@ public class KrakenManager : MonoBehaviour
 
     void SpawnSlidingTentacle(int spawnPoint, int tentacleNumber)
     {
-        switch (spawnPoint)
+        GameObject tentacle;
+        SlideTentacle slideTentacleSetup;
+        if (tentacleList[tentacleNumber].healthPoints <= tentacleHealthPoints)
         {
-            // Right
-            case 0:
-            case 1:
-            case 2:
-            case 3: 
-                if (tentacleNumber <= vulnerableTentacleCount)
-                {
-                    GameObject tentacle = Instantiate(vulnerableSlideAttackRightPrefab, slideAttackSpawnPoints[spawnPoint].position, Quaternion.identity);
-                    SlideTentacle slideTentacleSetup = tentacle.GetComponent<SlideTentacle>();
-                    slideTentacleSetup.isVulnerable = true;
-                    slideTentacleSetup.remainingHealthPoints = tentacleHealth[tentacleNumber];
-                    slideTentacleSetup.slideDirection = Vector2.left;
+            if (spawnPoint == 0 || spawnPoint == 1 || spawnPoint == 2 || spawnPoint == 3)
+            {
+                tentacle = Instantiate(vulnerableSlideAttackRightPrefab, slideAttackSpawnPoints[spawnPoint].position, Quaternion.identity);
+                slideTentacleSetup = tentacle?.GetComponent<SlideTentacle>();
+                slideTentacleSetup.slideDirection = Vector2.left;
+            }
+            else if (spawnPoint == 4 || spawnPoint == 5 || spawnPoint == 6 || spawnPoint == 7)
+            {
+                tentacle = Instantiate(vulnerableSlideAttackTopPrefab, slideAttackSpawnPoints[spawnPoint].position, Quaternion.identity);
+                slideTentacleSetup = tentacle?.GetComponent<SlideTentacle>();
+                slideTentacleSetup.slideDirection = Vector2.down;
+            }
+            else if (spawnPoint == 8 || spawnPoint == 9 || spawnPoint == 10 || spawnPoint == 11)
+            {
+                tentacle = Instantiate(vulnerableSlideAttackLeftPrefab, slideAttackSpawnPoints[spawnPoint].position, Quaternion.identity);
+                slideTentacleSetup = tentacle?.GetComponent<SlideTentacle>();
+                slideTentacleSetup.slideDirection = Vector2.right;
+            }
+            else
+            {
+                tentacle = Instantiate(vulnerableSlideAttackBottomPrefab, slideAttackSpawnPoints[spawnPoint].position, Quaternion.identity);
+                slideTentacleSetup = tentacle?.GetComponent<SlideTentacle>();
+                slideTentacleSetup.slideDirection = Vector2.up;
+            }
 
-                    //take necessary updates and delete gameobject here
-                }
-                else
-                {
-                    GameObject tentacle = Instantiate(armouredSlideAttackRightPrefab, slideAttackSpawnPoints[spawnPoint].position, Quaternion.identity);
-                    SlideTentacle slideTentacleSetup = tentacle.GetComponent<SlideTentacle>();
-                    slideTentacleSetup.isVulnerable = false;
-                    slideTentacleSetup.remainingHealthPoints = tentacleHealth[tentacleNumber];
-                    slideTentacleSetup.slideDirection = Vector2.left;
-                }
-                break;
+            tentacle?.transform.SetParent(slideAttackSpawnPoints[spawnPoint], true); // keep world scale
+            slideTentacleSetup.remainingHealthPoints = tentacleList[tentacleNumber].healthPoints;
+            slideTentacleSetup.tentacleNumber = tentacleNumber;
+            slideTentacleSetup.krakenManager = this;
+        }
+        else
+        {
+            if (spawnPoint == 0 || spawnPoint == 1 || spawnPoint == 2 || spawnPoint == 3)
+            {
+                tentacle = Instantiate(armouredSlideAttackRightPrefab, slideAttackSpawnPoints[spawnPoint].position, Quaternion.identity);
+                slideTentacleSetup = tentacle?.GetComponent<SlideTentacle>();
+                slideTentacleSetup.slideDirection = Vector2.left;
+            }
 
-            // Top
-            case 4:
-            case 5:
-            case 6:
-            case 7:
-                if (tentacleNumber <= vulnerableTentacleCount)
-                {
-                    GameObject tentacle = Instantiate(vulnerableSlideAttackTopPrefab, slideAttackSpawnPoints[spawnPoint].position, Quaternion.identity);
-                    SlideTentacle slideTentacleSetup = tentacle.GetComponent<SlideTentacle>();
-                    slideTentacleSetup.isVulnerable = true;
-                    slideTentacleSetup.remainingHealthPoints = tentacleHealth[tentacleNumber];
-                    slideTentacleSetup.slideDirection = Vector2.down;
-                }
-                else
-                {
-                    GameObject tentacle = Instantiate(armouredSlideAttackTopPrefab, slideAttackSpawnPoints[spawnPoint].position, Quaternion.identity);
-                    SlideTentacle slideTentacleSetup = tentacle.GetComponent<SlideTentacle>();
-                    slideTentacleSetup.isVulnerable = false;
-                    slideTentacleSetup.remainingHealthPoints = tentacleHealth[tentacleNumber];
-                    slideTentacleSetup.slideDirection = Vector2.down;
-                }
-                break;
+            else if (spawnPoint == 4 || spawnPoint == 5 || spawnPoint == 6 || spawnPoint == 7)
+            {
+                tentacle = Instantiate(armouredSlideAttackTopPrefab, slideAttackSpawnPoints[spawnPoint].position, Quaternion.identity);
+                slideTentacleSetup = tentacle?.GetComponent<SlideTentacle>();
+                slideTentacleSetup.slideDirection = Vector2.down;
+            }
 
-            // Left
-            case 8:
-            case 9:
-            case 10:
-            case 11:
-                if (tentacleNumber <= vulnerableTentacleCount)
-                {
-                    GameObject tentacle = Instantiate(vulnerableSlideAttackLeftPrefab, slideAttackSpawnPoints[spawnPoint].position, Quaternion.identity);
-                    SlideTentacle slideTentacleSetup = tentacle.GetComponent<SlideTentacle>();
-                    slideTentacleSetup.isVulnerable = true;
-                    slideTentacleSetup.remainingHealthPoints = tentacleHealth[tentacleNumber];
-                    slideTentacleSetup.slideDirection = Vector2.right;
-                }
-                else
-                {
-                    GameObject tentacle = Instantiate(armouredSlideAttackLeftPrefab, slideAttackSpawnPoints[spawnPoint].position, Quaternion.identity);
-                    SlideTentacle slideTentacleSetup = tentacle.GetComponent<SlideTentacle>();
-                    slideTentacleSetup.isVulnerable = false;
-                    slideTentacleSetup.remainingHealthPoints = tentacleHealth[tentacleNumber];
-                    slideTentacleSetup.slideDirection = Vector2.right;
-                }
-                break;
+            else if (spawnPoint == 8 || spawnPoint == 9 || spawnPoint == 10 || spawnPoint == 11)
+            {
+                tentacle = Instantiate(armouredSlideAttackLeftPrefab, slideAttackSpawnPoints[spawnPoint].position, Quaternion.identity);
+                slideTentacleSetup = tentacle?.GetComponent<SlideTentacle>();
+                slideTentacleSetup.slideDirection = Vector2.right;
+            }
 
-            // Down
-            case 12:
-            case 13:
-            case 14:
-            case 15:
-                if (tentacleNumber <= vulnerableTentacleCount)
-                {
-                    GameObject tentacle = Instantiate(vulnerableSlideAttackDownPrefab, slideAttackSpawnPoints[spawnPoint].position, Quaternion.identity);
-                    SlideTentacle slideTentacleSetup = tentacle.GetComponent<SlideTentacle>();
-                    slideTentacleSetup.isVulnerable = true;
-                    slideTentacleSetup.remainingHealthPoints = tentacleHealth[tentacleNumber];
-                    slideTentacleSetup.slideDirection = Vector2.up;
-                }
-                else
-                {
-                    GameObject tentacle = Instantiate(armouredSlideAttackDownPrefab, slideAttackSpawnPoints[spawnPoint].position, Quaternion.identity);
-                    SlideTentacle slideTentacleSetup = tentacle.GetComponent<SlideTentacle>();
-                    slideTentacleSetup.isVulnerable = false;
-                    slideTentacleSetup.remainingHealthPoints = tentacleHealth[tentacleNumber];
-                    slideTentacleSetup.slideDirection = Vector2.up;
-                }
-                break;
+            else
+            {
+                tentacle = Instantiate(armouredSlideAttackBottomPrefab, slideAttackSpawnPoints[spawnPoint].position, Quaternion.identity);
+                slideTentacleSetup = tentacle?.GetComponent<SlideTentacle>();
+                slideTentacleSetup.slideDirection = Vector2.up;
+            }
+
+            tentacle.transform.SetParent(slideAttackSpawnPoints[spawnPoint], true); // keep world scale
+            slideTentacleSetup.remainingHealthPoints = tentacleList[tentacleNumber].healthPoints;
+            slideTentacleSetup.tentacleNumber = tentacleNumber;
+            slideTentacleSetup.krakenManager = this;
         }
     }
 
