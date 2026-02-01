@@ -138,8 +138,16 @@ public class EnemyTypeTwoManager : MonoBehaviour
 
     void ShootPlayer()
     {
+        if (animator)
+        {
+            animator.SetBool("IsShooting", true);
+        }
         if (isOnCooldown)
         {
+            if (animator)
+            {
+                animator.SetBool("IsShooting", false);
+            }
             cooldownTimer += Time.fixedDeltaTime;
             if (cooldownTimer >= shotCooldown)
             {

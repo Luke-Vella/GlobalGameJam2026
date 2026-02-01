@@ -85,17 +85,17 @@ public class SlideTentacle : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && hasAttacked)
-        {
-            // Apply damage to player
-            PlayerController playerController = other.GetComponent<PlayerController>();
-            if (playerController != null)
-            {
-                float damageAmount = isVulnerable ? 15f : 25f; // More damage from armored tentacles
-                playerController.currentOxygen = Mathf.Max(0f, playerController.currentOxygen - damageAmount);
-                Debug.Log($"Player hit by {(isVulnerable ? "vulnerable" : "armored")} tentacle for {damageAmount} damage!");
-            }
-        }
+        //if (other.CompareTag("Player") && hasAttacked)
+        //{
+        //    // Apply damage to player
+        //    PlayerController playerController = other.GetComponent<PlayerController>();
+        //    if (playerController != null)
+        //    {
+        //        float damageAmount = isVulnerable ? 15f : 25f; // More damage from armored tentacles
+        //        playerController.currentOxygen = Mathf.Max(0f, playerController.currentOxygen - damageAmount);
+        //        Debug.Log($"Player hit by {(isVulnerable ? "vulnerable" : "armored")} tentacle for {damageAmount} damage!");
+        //    }
+        //}
     }
 
     void OnCollisionEnter2D(Collision2D collision)
