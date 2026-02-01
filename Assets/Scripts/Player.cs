@@ -5,6 +5,7 @@ using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -100,7 +101,7 @@ public class PlayerController : MonoBehaviour
     {
         if(CurrentOxygen <= 0f)
         {
-            GameStateManager.Instance.Restart();
+            SceneManager.LoadScene(5);
             AudioManager.Instance.PlaySFX(AudioDatabase.Instance.GameOverClip);
         }
 

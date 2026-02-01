@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2230992760393198401}
   - component: {fileID: 1560474350070085577}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LumenMask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9147187438666899305}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Masks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2332764209664952175}
   - component: {fileID: 4194979974385677659}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1047229368780159620}
   - component: {fileID: 4587822901863991011}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SonarMask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -246,7 +246,7 @@ GameObject:
   - component: {fileID: 2533604915460824428}
   - component: {fileID: 4904471405549435412}
   - component: {fileID: 5221680386053002362}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -320,7 +320,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7416033722254413752}
   - component: {fileID: 2484563907390673070}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DefaultMask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -372,7 +372,7 @@ GameObject:
   - component: {fileID: 3686087416413293744}
   - component: {fileID: 389625671934247740}
   - component: {fileID: 8416111637489624404}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -447,7 +447,7 @@ GameObject:
   - component: {fileID: 8152138369238732912}
   - component: {fileID: 7547102074916702857}
   - component: {fileID: 3742923675136049758}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -585,7 +585,7 @@ GameObject:
   - component: {fileID: 3389064733820521229}
   - component: {fileID: 7028766815262353465}
   - component: {fileID: 6225310262149639732}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -967,7 +967,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6254222801209011841}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Firepoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1001,7 +1001,7 @@ GameObject:
   - component: {fileID: 3262755012186560619}
   - component: {fileID: 7071709580608825406}
   - component: {fileID: 8263747480663160498}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1101,7 +1101,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 462302294208551503}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1139,6 +1139,10 @@ PrefabInstance:
     - target: {fileID: 653924270360686546, guid: f0a18173d193d1a48b33d27b92cede5c, type: 3}
       propertyPath: m_Name
       value: LightForward
+      objectReference: {fileID: 0}
+    - target: {fileID: 653924270360686546, guid: f0a18173d193d1a48b33d27b92cede5c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3134372590947068814, guid: f0a18173d193d1a48b33d27b92cede5c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1296,6 +1300,10 @@ PrefabInstance:
     - target: {fileID: 4235775557261388075, guid: 588d0f51bc1f97c4c98ec1753b7e94f6, type: 3}
       propertyPath: m_Name
       value: LightAround
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235775557261388075, guid: 588d0f51bc1f97c4c98ec1753b7e94f6, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7642234606008542948, guid: 588d0f51bc1f97c4c98ec1753b7e94f6, type: 3}
       propertyPath: m_LocalScale.x
