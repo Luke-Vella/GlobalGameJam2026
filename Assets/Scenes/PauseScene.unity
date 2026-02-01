@@ -1442,7 +1442,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Play!
+  m_text: Begin
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1577,8 +1577,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "\t\t\t  \t      Controls\nMove : WASD\t\t\t\t\tLumen mask: 1\nShoot: left
-    click\t\t\t\t\tSonar mask: 2\nUse mask: space\t\t\t\t\tDefault Mask: 3\nSwim
-    faster: shift\n\n\n"
+    click\t\t\t\t\tSonar mask: 2\nUse mask: space\t\t\t\t\tDefault Mask: 3\nBoost:
+    shift\n\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1691,7 +1691,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 375.87, y: -142}
+  m_AnchoredPosition: {x: 227, y: -221}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.55143833, y: 0.5}
 --- !u!114 &658756237
@@ -2196,7 +2196,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.28449222}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.66199493}
+  m_AnchoredPosition: {x: 0, y: -0.66200256}
   m_SizeDelta: {x: 0, y: 1.3199997}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1148035967
@@ -2404,8 +2404,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 13, y: -26.34613}
-  m_SizeDelta: {x: 869.2761, y: 258.3207}
+  m_AnchoredPosition: {x: 0, y: 0.000017116}
+  m_SizeDelta: {x: 982.4453, y: 432.41}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1458294734
 MonoBehaviour:
@@ -2427,13 +2427,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'You have wrecked in an Alien planet, and your spaceship is broken, but
-    there''s still hope. Your radar is receiving signal from the Abyssal depths.
-
-
-    Your
-    goal is to grab enogh fuel cells and reach the sea bed. There you will find a
-    wrecked starship. Use your fuel to start the engines and leave the planet.'
+  m_text: "I've crash landed on an alien planet, and my spaceship was broken as a
+    result...\n\n...but there's still hope. \n\n I should investigate that ship signal
+    coming from the depths. However, I need to collect enough fuel cells to be able
+    to leave this planet."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2467,8 +2464,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -3558,7 +3555,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 367.63995, y: -142}
+  m_AnchoredPosition: {x: 0, y: -221}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2086639694
@@ -3599,10 +3596,10 @@ RectTransform:
   - {fileID: 2017245243}
   m_Father: {fileID: 831659350}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.08344464, y: 0.17146021}
-  m_AnchorMax: {x: 0.918259, y: 0.87000006}
-  m_AnchoredPosition: {x: 0.23022461, y: -14.4295}
-  m_SizeDelta: {x: -0.4604, y: 28.8591}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2086639696
 MonoBehaviour:
@@ -3708,13 +3705,12 @@ MonoBehaviour:
 
 
     Default
-    mask: it''s the basic mask with no special abilities
+    mask: the basic mask with no special abilities
 
-    Sonar mask: use it
-    to locate fuel tanks
+    Sonar mask: use it to locate
+    fuel tanks
 
-    Lumen mask: enlights the surrounding area, useful in
-    dark waters'
+    Lumen mask: lights the surrounding area, useful in dark waters'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3748,7 +3744,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -3827,7 +3823,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -322.83, y: -142}
+  m_AnchoredPosition: {x: -202, y: -221}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.6175727, y: 0.5}
 --- !u!114 &2143967453
