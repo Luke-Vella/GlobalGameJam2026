@@ -6,6 +6,7 @@ public class BossEntryTrigger : MonoBehaviour
 {
     [Header("Music")]
     [SerializeField] private GameObject AudioManagerObject;
+    [SerializeField] private GameObject KrakenBoss;
     [SerializeField] private AudioClip newMusic;
 
     private AudioManager audioManager;
@@ -36,7 +37,7 @@ public class BossEntryTrigger : MonoBehaviour
         {
             ChangeMusic();
             hasTriggered = true;
-
+            KrakenBoss.SetActive(true);
             // Remove blocker so player can proceed
             Destroy(gameObject);
         }
