@@ -29,6 +29,8 @@ public class SlideTentacle : MonoBehaviour, IDamageable
     // Start is called before the first frame update
     void Start()
     {
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
         originalPosition = transform.position;
         StartCoroutine(Attack());
     }
@@ -147,13 +149,14 @@ public class SlideTentacle : MonoBehaviour, IDamageable
         {
             Destroy(gameObject);
         }
-        else if (remainingHealthPoints <= 3)
-        {
-            spriteRenderer.sprite = vulnerableVersion;
-        }
         else
         {
             Debug.Log($"Remaining health: {remainingHealthPoints}");
+        }
+
+        if (remainingHealthPoints <= 3)
+        {
+            spriteRenderer.sprite = vulnerableVersion;
         }
     }
 }
