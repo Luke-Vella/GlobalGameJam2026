@@ -20,7 +20,6 @@ public class DamageHandler : MonoBehaviour
 
             playerController.Damage(damageAmount);
             Debug.Log($"Player oxygen: {playerController.CurrentOxygen}/{100f}");
-            AudioManager.Instance.PlaySFX(AudioDatabase.Instance.DamageHitClip);
         }
     }
 
@@ -40,7 +39,6 @@ public class DamageHandler : MonoBehaviour
 
             playerController.Damage(damageAmount);
             Debug.Log($"Player oxygen: {playerController.CurrentOxygen}/{100f}");
-            AudioManager.Instance.PlaySFX(AudioDatabase.Instance.DamageHitClip);
 
             // If this is a projectile, destroy it
             Destroy(gameObject);

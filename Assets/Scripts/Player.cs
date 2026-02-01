@@ -187,6 +187,8 @@ public class PlayerController : MonoBehaviour
 
         if(!silent)
         {
+            AudioManager.Instance.PlaySFX(AudioDatabase.Instance.DamageHitClip);
+
             // Start invulnerability
             if (invulnerabilityCoroutine != null)
             {

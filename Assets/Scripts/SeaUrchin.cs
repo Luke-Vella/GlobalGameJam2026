@@ -34,7 +34,6 @@ public class SeaUrchin : MonoBehaviour
             PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
             playerController.Damage(5f);
             Debug.Log($"Player oxygen: {playerController.CurrentOxygen}/{100f}");
-            AudioManager.Instance.PlaySFX(AudioDatabase.Instance.DamageHitClip);
         }
     }
 }
