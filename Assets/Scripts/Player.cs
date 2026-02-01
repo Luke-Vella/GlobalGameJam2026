@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -24,15 +26,32 @@ public class PlayerController : MonoBehaviour
     public float maxRotationSpeed = 180f;
     public float rotationDrag = 3f;
     public float movingRotationMultiplier = 0.3f;
-    public float currentOxygen = 100f;
+    private float currentOxygen = 100f;
 
     [Header("Sprite Settings")]
     public SpriteRenderer spriteRenderer;
+
+    [Header("Invulnerability Settings")]
+    public float invulnerabilityDuration = 3f;
+    public float flashInterval = 0.1f;
+    private bool isInvulnerable = false;
+    private Coroutine invulnerabilityCoroutine;
 
     [Header("Mask System")]
     public Mask[] availableMasks; // Assign masks in order: [0] = Default, [1] = Lumen, [2] = Sonar
     private int currentMaskIndex = 0;
     private Mask currentMask;
+
+    [Header("Projectile Settings")]
+    public Projectile projectilePrefab;
+    public Transform firePoint;
+    public float fireCooldown = 3f; // 3 second cooldown between shots
+    public float recoilForce = 2f; // Force applied in opposite direction when firing
+    private float fireCooldownTimer = 0f;
+    private float currentAmmo = 3f;
+    private bool requiresCooldown = false;
+    public Slider cooldownTimerSlider;
+    public TMP_Text cooldownTimerLabel;
 
     public Rigidbody2D Rb { get; private set; }
     public Vector2 MoveInput { get; set; }
@@ -41,6 +60,8 @@ public class PlayerController : MonoBehaviour
     public PlayerStateMachine StateMachine { get; private set; }
     public IdleSwimState IdleSwimState { get; private set; }
     public SwimState SwimState { get; private set; }
+    public float CurrentOxygen { get => currentOxygen; private set => currentOxygen = value; }
+    public bool IsInvulnerable { get => isInvulnerable; }
 
     private Camera mainCamera;
     private float currentRotationVelocity = 0f;
@@ -77,12 +98,39 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if(currentOxygen <= 0f)
+        if(CurrentOxygen <= 0f)
         {
             GameStateManager.Instance.Restart();
             AudioManager.Instance.PlaySFX(AudioDatabase.Instance.GameOverClip);
         }
 
+        if(requiresCooldown)
+        {
+            if (cooldownTimerSlider != null)
+            {
+                cooldownTimerSlider.value = fireCooldownTimer / fireCooldown;
+            }
+
+            if(cooldownTimerLabel != null)
+            {
+                cooldownTimerLabel.text = "Reloading... " + Mathf.CeilToInt(fireCooldownTimer).ToString();
+            }
+
+            if (fireCooldownTimer > 0f)
+            {
+                fireCooldownTimer -= Time.deltaTime;
+            }
+            else
+            {
+                currentAmmo = 3f;
+                requiresCooldown = false;
+
+                cooldownTimerSlider.gameObject.SetActive(false);
+                cooldownTimerLabel.enabled = false;
+
+                AudioManager.Instance.PlaySFX(AudioDatabase.Instance.ReloadedClip);
+            }
+        }
 
         StateMachine.Update();
 
@@ -118,6 +166,65 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Handled");
     }
 
+    public void ReplenishOxygen(float oxygenGain)
+    {
+        CurrentOxygen += oxygenGain;
+        CurrentOxygen = Mathf.Min(CurrentOxygen, 100f);
+    }
+
+    public void Damage(float oxygenLoss, bool silent = false)
+    {
+        // Don't take damage if invulnerable
+        if (isInvulnerable)
+        {
+            return;
+        }
+
+        CurrentOxygen -= oxygenLoss;
+        CurrentOxygen = Mathf.Max(CurrentOxygen, 0f);
+
+
+
+        if(!silent)
+        {
+            AudioManager.Instance.PlaySFX(AudioDatabase.Instance.DamageHitClip);
+
+            // Start invulnerability
+            if (invulnerabilityCoroutine != null)
+            {
+                StopCoroutine(invulnerabilityCoroutine);
+            }
+
+            invulnerabilityCoroutine = StartCoroutine(InvulnerabilityRoutine());
+        }
+    }
+
+    private IEnumerator InvulnerabilityRoutine()
+    {
+        isInvulnerable = true;
+        float elapsed = 0f;
+
+        while (elapsed < invulnerabilityDuration)
+        {
+            // Toggle sprite visibility for flashing effect
+            if (spriteRenderer != null)
+            {
+                spriteRenderer.enabled = !spriteRenderer.enabled;
+            }
+
+            yield return new WaitForSeconds(flashInterval);
+            elapsed += flashInterval;
+        }
+
+        // Ensure sprite is visible when invulnerability ends
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.enabled = true;
+        }
+
+        isInvulnerable = false;
+        invulnerabilityCoroutine = null;
+    }
 
     private void HandleRotation()
     {
@@ -137,9 +244,6 @@ public class PlayerController : MonoBehaviour
 
         // Calculate angle in degrees
         float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        
-        // Subtract 90 because sprite faces up by default
-        targetAngle -= 90f;
 
         // Directly set rotation without any smoothing or velocity
         transform.rotation = Quaternion.Euler(0f, 0f, targetAngle);
@@ -209,17 +313,59 @@ public class PlayerController : MonoBehaviour
         MoveInput = context.ReadValue<Vector2>();
     }
 
+    public void OnFire(InputAction.CallbackContext context)
+    {
+        if (context.performed && fireCooldownTimer <= 0f)
+        {
+            Projectile proj = Instantiate(
+                projectilePrefab,
+                firePoint.position,
+                Quaternion.identity
+            );
+
+            Vector2 direction = firePoint.right; // or up depending on sprite
+            proj.Fire(direction);
+
+            // Apply recoil force in opposite direction
+            Rb.AddForce(-direction * recoilForce, ForceMode2D.Impulse);
+
+            currentAmmo--;
+
+            if (currentAmmo == 0)
+            {
+                requiresCooldown = true;
+                fireCooldownTimer = fireCooldown;
+
+                if (cooldownTimerSlider != null)
+                {
+                    cooldownTimerSlider.value = 1f;
+                    cooldownTimerSlider.gameObject.SetActive(true);
+                }
+
+                if(cooldownTimerLabel != null)
+                {
+                    cooldownTimerLabel.enabled = true;
+                }
+
+                AudioManager.Instance.PlaySFX(AudioDatabase.Instance.ReloadingClip);
+            }
+        }
+    }
+
     public void OnBoost(InputAction.CallbackContext context)
     {
         IsBoostPressed = context.ReadValueAsButton();
 
-        if(IsBoostPressed)
+        if(currentMask.maskID == 0)
         {
-            AudioManager.Instance.PlaySFX(AudioDatabase.Instance.SpeedBoostClip);
-        }
-        else
-        {
-            AudioManager.Instance.PlaySFX(AudioDatabase.Instance.SpeedBurstStopClip);
+            if(IsBoostPressed)
+            {
+                AudioManager.Instance.PlaySFX(AudioDatabase.Instance.SpeedBoostClip);
+            }
+            else
+            {
+                AudioManager.Instance.PlaySFX(AudioDatabase.Instance.SpeedBurstStopClip);
+            }
         }
     }
 

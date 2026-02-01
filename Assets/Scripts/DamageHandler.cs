@@ -12,9 +12,14 @@ public class DamageHandler : MonoBehaviour
         {
             PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
 
-            playerController.currentOxygen -= damageAmount;
-            Debug.Log($"Player oxygen: {playerController.currentOxygen}/{100f}");
-            AudioManager.Instance.PlaySFX(AudioDatabase.Instance.DamageHitClip);
+            // Check if player is invulnerable
+            if (playerController.IsInvulnerable)
+            {
+                return;
+            }
+
+            playerController.Damage(damageAmount);
+            Debug.Log($"Player oxygen: {playerController.CurrentOxygen}/{100f}");
         }
     }
 
@@ -23,9 +28,17 @@ public class DamageHandler : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
-            playerController.currentOxygen -= damageAmount;
-            Debug.Log($"Player oxygen: {playerController.currentOxygen}/{100f}");
-            AudioManager.Instance.PlaySFX(AudioDatabase.Instance.DamageHitClip);
+            
+            // Check if player is invulnerable
+            if (playerController.IsInvulnerable)
+            {
+                // Still destroy projectile but don't damage player
+                Destroy(gameObject);
+                return;
+            }
+
+            playerController.Damage(damageAmount);
+            Debug.Log($"Player oxygen: {playerController.CurrentOxygen}/{100f}");
 
             // If this is a projectile, destroy it
             Destroy(gameObject);

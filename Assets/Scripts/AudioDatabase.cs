@@ -26,6 +26,8 @@ public class AudioDatabase : MonoBehaviour
     [SerializeField] private AudioClip speedBurstStopClip;
     [SerializeField] private AudioClip swordFishChargeClip;
     [SerializeField] private AudioClip pauseMenuClip;
+    [SerializeField] private AudioClip reloadingClip;
+    [SerializeField] private AudioClip reloadedClip;
 
     public static AudioDatabase Instance;
 
@@ -52,6 +54,8 @@ public class AudioDatabase : MonoBehaviour
     public AudioClip SpeedBoostClip { get => speedBurstClip; set => speedBurstClip = value; }
     public AudioClip SpeedBurstStopClip { get => speedBurstStopClip; set => speedBurstStopClip = value; }
     public AudioClip PauseMenuClip { get => pauseMenuClip; set => pauseMenuClip = value; }
+    public AudioClip ReloadingClip { get => reloadingClip; set => reloadingClip = value; }
+    public AudioClip ReloadedClip { get => reloadedClip; set => reloadedClip = value; }
 
     private void Awake()
     {

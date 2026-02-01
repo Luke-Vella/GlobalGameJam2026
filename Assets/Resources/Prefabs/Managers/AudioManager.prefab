@@ -506,4 +506,6 @@ MonoBehaviour:
   speedBurstClip: {fileID: 8300000, guid: 43a75c492fd5ee74da8f290f3cf88c16, type: 3}
   speedBurstStopClip: {fileID: 8300000, guid: a0f2a1e95e256404ebfc1645256f59d4, type: 3}
   swordFishChargeClip: {fileID: 8300000, guid: dc8bab0e9d46ba44d99183772c8e6364, type: 3}
-  pauseMenuClip: {fileID: 0}
+  pauseMenuClip: {fileID: 8300000, guid: e65bc88646e25d6448d901f667058de7, type: 3}
+  reloadingClip: {fileID: 8300000, guid: fb6fe9b463505ed40a7e4e94601c45d5, type: 3}
+  reloadedClip: {fileID: 8300000, guid: 79a440480f2047245b2d34cd1450a80c, type: 3}
