@@ -627,7 +627,7 @@ MonoBehaviour:
   swimSpeed: 5
   drag: 2
   maxSpeed: 10
-  boostMultiplier: 2
+  boostMultiplier: 2.5
   lightForward: {fileID: 5211022834825026807}
   lightAround: {fileID: 923307538680102168}
   rotationSpeed: 5
@@ -950,10 +950,10 @@ EdgeCollider2D:
   m_Points:
   - {x: -8.054882, y: 0.55996895}
   - {x: -8.551638, y: 0.8630934}
-  - {x: -11.121776, y: 2.2735777}
-  - {x: -10.987859, y: 2.8923302}
-  - {x: -10.641322, y: 3.629058}
-  - {x: -10.26962, y: 3.923482}
+  - {x: -9.768669, y: 1.8135157}
+  - {x: -9.797125, y: 2.1887093}
+  - {x: -9.558835, y: 2.6818829}
+  - {x: -9.078881, y: 3.0304327}
   - {x: -7.3432655, y: 2.369689}
   - {x: -2.907402, y: 3.8914957}
   - {x: -0.015937805, y: 3.4733763}
@@ -980,10 +980,10 @@ EdgeCollider2D:
   - {x: -6.188447, y: -3.7409267}
   - {x: -6.8706675, y: -3.915392}
   - {x: -8.415749, y: -4.311949}
-  - {x: -9.07572, y: -4.3941174}
-  - {x: -9.544821, y: -4.5802803}
-  - {x: -9.857027, y: -3.926693}
-  - {x: -9.974606, y: -3.107687}
+  - {x: -8.399164, y: -4.2588005}
+  - {x: -8.462334, y: -3.9578457}
+  - {x: -8.476855, y: -3.3854446}
+  - {x: -8.783872, y: -2.5935135}
   - {x: -6.9452667, y: -2.0296497}
   - {x: -6.035492, y: -0.20095444}
   - {x: -7.8910007, y: 0.49197197}
@@ -1227,7 +1227,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6073541971053486225, guid: f0a18173d193d1a48b33d27b92cede5c, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6073541971053486225, guid: f0a18173d193d1a48b33d27b92cede5c, type: 3}
       propertyPath: m_Intensity
@@ -1265,7 +1265,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 2024591881284910182}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
   m_Name: 
@@ -1292,7 +1292,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3719547787519066444, guid: 588d0f51bc1f97c4c98ec1753b7e94f6, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3719547787519066444, guid: 588d0f51bc1f97c4c98ec1753b7e94f6, type: 3}
       propertyPath: m_Intensity
@@ -1389,7 +1389,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 4561656392483454036}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
   m_Name: 
