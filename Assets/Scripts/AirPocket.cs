@@ -17,7 +17,7 @@ public class AirPocket : MonoBehaviour
     private PlayerController _player;
     private bool isPlayerInside = false;
     private bool isActive = false; // Currently dispensing oxygen
-    private bool isOnCooldown = false;
+    private bool isOnCooldown = false; // cooldown
     
     private float activeTimer = 0f; // Tracks how long the pocket has been active
     private float cooldownTimer = 0f;
