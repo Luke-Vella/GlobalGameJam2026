@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 454374364796545010}
   - component: {fileID: 6397940156785076639}
-  - component: {fileID: 5242327211060463683}
   m_Layer: 0
   m_Name: Arm
   m_TagString: Untagged
@@ -28,7 +27,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6303173476641673353}
@@ -85,61 +84,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!68 &5242327211060463683
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1145370829599547963}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: 20.982922, y: -1.9343743}
-  - {x: 20.699783, y: -6.3184958}
-  - {x: 10.484484, y: -4.445328}
-  - {x: 3.1334136, y: -3.3606853}
-  - {x: -7.0442014, y: -4.4670715}
-  - {x: -12.976675, y: -3.8051279}
-  - {x: -17.353668, y: -2.871953}
-  - {x: -18.5596, y: -2.0905397}
-  - {x: -18.735542, y: -1.3563106}
-  - {x: -8.913948, y: 1.2874938}
-  - {x: -1.6141316, y: 2.099148}
-  - {x: 7.9741592, y: 0.9191804}
-  - {x: 12.05055, y: 1.9640919}
-  - {x: 18.386042, y: 2.8938072}
-  - {x: 20.785847, y: 2.8701806}
-  - {x: 20.900513, y: -1.8502717}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
 --- !u!1 &3038681206283482713
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,6 +96,7 @@ GameObject:
   - component: {fileID: -1404574688684525445}
   - component: {fileID: 7909880942197045335}
   - component: {fileID: 3194695654299517506}
+  - component: {fileID: 1990001768152724653}
   m_Layer: 0
   m_Name: KrakenAttack1_1
   m_TagString: Untagged
@@ -190,7 +135,7 @@ MonoBehaviour:
   shootOutSpeed: 50
   retractSpeed: 3
   shakeDuration: 1
-  shakeIntensity: 0.02
+  shakeIntensity: -24.46
   shakeFrequency: 30
   shootOutDistance: 17
   retractDistance: 10
@@ -238,4 +183,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50b6467e33c73924f8db1a39efc5418a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 20
+  damageAmount: 10
+--- !u!68 &1990001768152724653
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3038681206283482713}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: 12.527847, y: -0.06820965}
+  - {x: 12.293827, y: -2.8164914}
+  - {x: 1.1048942, y: -1.5913272}
+  - {x: -5.1631536, y: -2.2983122}
+  - {x: -11.249762, y: -1.2281079}
+  - {x: -11.322133, y: -0.7293515}
+  - {x: -8.134283, y: 0.106399596}
+  - {x: -5.71122, y: 0.60677975}
+  - {x: -1.4160432, y: 1.1615415}
+  - {x: 2.7791028, y: 0.674649}
+  - {x: 7.3540106, y: 0.7812419}
+  - {x: 12.396324, y: 1.4315327}
+  - {x: 12.436509, y: -0.71619034}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0

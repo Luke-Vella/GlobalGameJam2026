@@ -32,16 +32,11 @@ public class DamageHandler : MonoBehaviour
             // Check if player is invulnerable
             if (playerController.IsInvulnerable)
             {
-                // Still destroy projectile but don't damage player
-                Destroy(gameObject);
                 return;
             }
 
             playerController.Damage(damageAmount);
             Debug.Log($"Player oxygen: {playerController.CurrentOxygen}/{100f}");
-
-            // If this is a projectile, destroy it
-            Destroy(gameObject);
         }
     }
 }

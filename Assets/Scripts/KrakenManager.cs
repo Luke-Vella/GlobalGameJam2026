@@ -40,10 +40,10 @@ public class KrakenManager : MonoBehaviour
             tentacleList[i] = new Tentacle(i, tentacleHealthPoints, isVulnerable);
         }
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        NextAction("");
+        StartCoroutine(NextAction(""));
     }
 
-    void NextAction(string previousAction)
+    IEnumerator NextAction(string previousAction)
     {
         int randomValue = Random.Range(1, 11);
         if (previousAction == "SlideAttack")
@@ -80,6 +80,7 @@ public class KrakenManager : MonoBehaviour
                 StartCoroutine(SlamAttack());
             }
         }
+        yield break;
     }
 
     IEnumerator SlideAttack()
@@ -131,7 +132,7 @@ public class KrakenManager : MonoBehaviour
         }
 
         yield return new WaitForSeconds(bufferPerTentacleBetweenActions);
-        NextAction("SlideAttack");
+        StartCoroutine(NextAction("SlideAttack"));
         yield break;
     }
 
@@ -211,7 +212,7 @@ public class KrakenManager : MonoBehaviour
     IEnumerator SlamAttack()
     {
         // Implement Slam Attack Logic
-        NextAction("SlamAttack");
+        StartCoroutine(NextAction("SlamAttack"));
         yield break;
     }
 }

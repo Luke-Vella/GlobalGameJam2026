@@ -8,10 +8,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2788461610206832232, guid: 1550eab80dc9ccf4f87a6d0c6905ed3c, type: 3}
-      propertyPath: shootOutDistance
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 3038681206283482713, guid: 1550eab80dc9ccf4f87a6d0c6905ed3c, type: 3}
       propertyPath: m_Name
       value: KrakenAttack1_2_4

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2788461610206832232}
   - component: {fileID: 6108316204546629362}
   - component: {fileID: 8685547235920226425}
+  - component: {fileID: 3186735300794336514}
   m_Layer: 0
   m_Name: KrakenAttack1_2
   m_TagString: Untagged
@@ -98,7 +99,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50b6467e33c73924f8db1a39efc5418a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 20
+  damageAmount: 10
+--- !u!68 &3186735300794336514
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3038681206283482713}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: 12.483529, y: -0.39714313}
+  - {x: 12.262323, y: -2.861506}
+  - {x: 10.280256, y: -2.4412742}
+  - {x: 1.9644947, y: -1.4928857}
+  - {x: -4.7569494, y: -2.0652297}
+  - {x: -11.169018, y: -1.2940899}
+  - {x: -11.166664, y: -0.70318484}
+  - {x: -6.3387165, y: 0.45676675}
+  - {x: -2.245938, y: 1.1128975}
+  - {x: 4.903133, y: 0.5862028}
+  - {x: 12.287407, y: 1.360495}
+  - {x: 12.353197, y: -0.6720884}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!1 &6867577529003105163
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,7 +161,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8758716744165761029}
   - component: {fileID: 1923703938960801057}
-  - component: {fileID: 4875460851335234607}
   m_Layer: 0
   m_Name: Arm
   m_TagString: Untagged
@@ -127,7 +178,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6303173476641673353}
@@ -184,57 +235,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!68 &4875460851335234607
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6867577529003105163}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: 20.667606, y: -0.8662634}
-  - {x: 20.525072, y: -5.911719}
-  - {x: 3.2336063, y: -3.2391808}
-  - {x: -2.9407659, y: -3.98774}
-  - {x: -5.52578, y: -4.070148}
-  - {x: -11.548525, y: -3.9235039}
-  - {x: -18.49113, y: -2.2900093}
-  - {x: -18.523977, y: -1.4150921}
-  - {x: -9.533508, y: 1.1149677}
-  - {x: -2.1272001, y: 2.041971}
-  - {x: 5.017907, y: 1.2067039}
-  - {x: 12.2830105, y: 1.5695298}
-  - {x: 17.099072, y: 2.5872889}
-  - {x: 20.654308, y: 2.5862012}
-  - {x: 20.672503, y: -0.8662653}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0

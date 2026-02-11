@@ -53,6 +53,7 @@ public class Projectile : MonoBehaviour
 
         // Check if the object can take damage
         IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
+        Debug.Log($"Projectile hit {collision.gameObject.name}");
         if (damageable != null)
         {
             damageable.TakeDamage(); // You can add a damage parameter

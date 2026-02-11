@@ -35,7 +35,7 @@ public class SlideTentacle : MonoBehaviour, IDamageable
         StartCoroutine(Attack());
     }
 
-    IEnumerator Attack()
+    public IEnumerator Attack()
     {
         //Start with shake effect
         Vector3 originalLocalPosition = transform.localPosition;
